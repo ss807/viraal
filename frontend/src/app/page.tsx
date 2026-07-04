@@ -205,7 +205,7 @@ export default function HomePage() {
                     type="submit"
                     className="w-full py-3 bg-primary text-on-primary hover:bg-on-primary-container transition-colors rounded-xl font-sans text-xs font-bold shadow-sm flex items-center justify-center gap-2 uppercase tracking-wider"
                   >
-                    Call Demo (English) <span class="material-symbols-outlined text-[16px]">arrow_outward</span>
+                    Call Demo (English) <span className="material-symbols-outlined text-[16px]">arrow_outward</span>
                   </button>
                 </form>
               ) : callStatus === "calling" ? (
