@@ -1,78 +1,95 @@
 "use client";
 
-import React from "react";
-import { usePathname } from "next/navigation";
+import React, { useState } from "react";
 
-export default function WhatsAppWidget() {
-  const pathname = usePathname();
+export function WhatsAppWidget() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [message, setMessage] = useState("");
 
-  // Dynamically generate context-aware pre-filled WhatsApp message
-  const getWhatsAppMessage = () => {
-    if (pathname?.includes("real-estate")) {
-      return "Hi Viraal, I'm interested in the Real Estate Lead Automation package. Please share demo details.";
-    }
-    if (pathname?.includes("jewellery")) {
-      return "Hi Viraal, I want to explore WhatsApp catalog & AI automation for my Jewellery store.";
-    }
-    if (pathname?.includes("pricing")) {
-      return "Hi Viraal, I'd like to discuss transparent pricing and bundle packages for my business.";
-    }
-    if (pathname?.includes("solutions")) {
-      return "Hi Viraal, I want to learn more about your AI automation solutions and get a free trial.";
-    }
-    return "Hi Viraal, I want to explore 24/7 AI lead generation & WhatsApp automation for my business.";
+  const handleSend = (e: React.FormEvent) => {
+    e.preventDefault();
+    const phone = "919876543210"; // Default business phone
+    const text = encodeURIComponent(message || "Hi Agnostic AI team, I want a free demo for my business.");
+    window.open(`https://wa.me/${phone}?text=${text}`, "_blank");
   };
 
-  const phone = "919876543210"; // Sample official WhatsApp business number
-  const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(getWhatsAppMessage())}`;
-
   return (
-    <>
-      {/* Desktop Floating WhatsApp Widget (Bottom-Right) */}
-      <div className="hidden md:flex fixed bottom-8 right-8 z-50 flex-col items-end gap-2 group">
-        {/* Tooltip bubble */}
-        <div className="bg-surface border border-outline/40 shadow-xl px-4 py-2 rounded-2xl rounded-br-none text-xs text-on-surface font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap">
-          💬 Need instant answers? Chat with AI!
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+      {isOpen && (
+        <div className="mb-4 w-80 sm:w-96 bg-surface-container-lowest border border-outline-variant/30 rounded-2xl shadow-2xl overflow-hidden animate-fade-in">
+          {/* Header */}
+          <div className="bg-secondary text-on-secondary p-4 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold text-base shadow-sm">
+                AI
+              </div>
+              <div>
+                <h4 className="font-display font-bold text-sm">Agnostic AI Assistant</h4>
+                <div className="flex items-center gap-1.5 text-xs opacity-90">
+                  <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                  <span>Online | Reply in 30s</span>
+                </div>
+              </div>
+            </div>
+            <button
+              onClick={() => setIsOpen(false)}
+              className="p-1 hover:bg-black/10 rounded-lg transition-colors text-on-secondary"
+              aria-label="Close chat"
+            >
+              <span className="material-symbols-outlined text-xl">close</span>
+            </button>
+          </div>
+
+          {/* Body */}
+          <div className="p-4 bg-surface-container-low min-h-[180px] space-y-3 font-sans text-sm">
+            <div className="bg-surface-container-lowest border border-outline-variant/20 p-3 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] text-on-background">
+              <p className="font-semibold text-primary mb-1">Agnostic AI Bot ⚡</p>
+              <p className="text-xs leading-relaxed text-on-surface-variant">
+                Namaste! Welcome to Viraal. How can we automate your lead generation or customer support today?
+              </p>
+            </div>
+            <div className="bg-surface-container-lowest border border-outline-variant/20 p-3 rounded-2xl rounded-tl-none shadow-sm max-w-[85%] text-on-background">
+              <p className="text-xs text-on-surface-variant">
+                Want a free AI Growth Audit for your business?
+              </p>
+            </div>
+          </div>
+
+          {/* Input */}
+          <form onSubmit={handleSend} className="p-3 bg-surface-container-lowest border-t border-outline-variant/20 flex gap-2">
+            <input
+              type="text"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Type your message..."
+              className="flex-1 bg-surface-container-low border border-outline-variant/30 rounded-xl px-3 py-2 text-xs text-on-background focus:outline-none focus:border-secondary transition-colors"
+            />
+            <button
+              type="submit"
+              className="bg-secondary text-on-secondary px-3 py-2 rounded-xl text-xs font-semibold hover:bg-secondary/90 transition-colors flex items-center gap-1"
+            >
+              <span>Send</span>
+              <span className="material-symbols-outlined text-sm">send</span>
+            </button>
+          </form>
         </div>
-        <a
-          href={whatsappUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Chat on WhatsApp"
-          className="relative bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 hover:rotate-3 transition-all duration-300 flex items-center justify-center w-16 h-16 border-2 border-white/20 group hover:shadow-[#25D366]/40"
-        >
-          {/* Unread notification badge */}
-          <span className="absolute -top-1 -right-1 bg-primary text-on-primary font-mono text-[11px] font-bold w-6 h-6 rounded-full flex items-center justify-center border-2 border-background animate-bounce">
+      )}
+
+      {/* Trigger Button */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="bg-secondary text-on-secondary w-14 h-14 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all flex items-center justify-center border-2 border-primary/50 group relative"
+        aria-label="Open WhatsApp Chat"
+      >
+        <span className="material-symbols-outlined text-3xl group-hover:rotate-12 transition-transform">
+          {isOpen ? "close" : "chat"}
+        </span>
+        {!isOpen && (
+          <span className="absolute -top-1 -right-1 w-4 h-4 bg-primary text-on-primary rounded-full text-[10px] font-bold flex items-center justify-center animate-pulse">
             1
           </span>
-          <span className="material-symbols-outlined text-[32px]">chat</span>
-        </a>
-      </div>
-
-      {/* Sticky Mobile Bottom Bar (Always Visible on Mobile) */}
-      <div className="md:hidden fixed bottom-0 inset-x-0 z-50 bg-surface/95 backdrop-blur-xl border-t border-outline/40 p-3 shadow-2xl flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2.5 overflow-hidden">
-          <div className="w-10 h-10 rounded-full bg-[#25D366]/15 flex items-center justify-center shrink-0 border border-[#25D366]/30">
-            <span className="material-symbols-outlined text-[#25D366] text-[22px]">smart_toy</span>
-          </div>
-          <div className="flex flex-col truncate">
-            <span className="text-xs font-bold text-on-surface flex items-center gap-1">
-              AI Growth Bot <span className="w-2 h-2 rounded-full bg-success animate-pulse inline-block"></span>
-            </span>
-            <span className="text-[11px] text-tertiary truncate">Online • Replies in 30s</span>
-          </div>
-        </div>
-
-        <a
-          href={whatsappUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-primary hover:bg-primary-fixed text-on-primary font-bold text-sm px-5 py-2.5 rounded-xl shadow-lg shadow-primary/20 flex items-center gap-2 shrink-0 active:scale-95 transition-transform"
-        >
-          <span className="material-symbols-outlined text-[18px] text-on-primary">chat</span>
-          <span>Chat Now</span>
-        </a>
-      </div>
-    </>
+        )}
+      </button>
+    </div>
   );
 }

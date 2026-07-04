@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: #0A0F1C;
+  --color-on-background: #FFFFFF;
+  --color-primary: #FFC107;
+  --color-on-primary: #0A0F1C;
+  --color-primary-container: #1E293B;
+  --color-on-primary-container: #FFD54F;
+  --color-primary-fixed: #FFC107;
+  --color-on-primary-fixed: #0A0F1C;
+  --color-secondary: #00E5FF;
+  --color-on-secondary: #0A0F1C;
+  --color-secondary-container: #0E3846;
+  --color-on-secondary-container: #80D8FF;
+  --color-tertiary: #A0AEC0;
+  --color-surface: #0F172A;
+  --color-on-surface: #FFFFFF;
+  --color-on-surface-variant: #A0AEC0;
+  --color-surface-variant: #1E293B;
+  --color-surface-container: #131C31;
+  --color-surface-container-low: #0D1324;
+  --color-surface-container-lowest: #080C16;
+  --color-surface-container-high: #1A243B;
+  --color-surface-container-highest: #22304E;
+  --color-outline: #334155;
+  --color-outline-variant: #1E293B;
+  --color-error: #EF4444;
+  --color-error-container: #7F1D1D;
+  --color-on-error-container: #FECACA;
+  --color-success: #4ADE80;
+
+  --font-sans: var(--font-inter), sans-serif;
+  --font-display: var(--font-montserrat), sans-serif;
+  --font-mono: var(--font-space-grotesk), monospace;
+
+  --spacing-stack-sm: 8px;
+  --spacing-stack-md: 16px;
+  --spacing-stack-lg: 32px;
+  --spacing-section-gap: 64px;
+  --spacing-gutter: 20px;
+  --spacing-margin-mobile: 16px;
+  --spacing-margin-desktop: 64px;
+  --spacing-container-max: 1280px;
+
+  --font-size-display-lg: 48px;
+  --font-size-display-lg--line-height: 1.2;
+  --font-size-display-lg--letter-spacing: -0.02em;
+  --font-size-display-lg--font-weight: 800;
+
+  --font-size-headline-lg: 32px;
+  --font-size-headline-lg--line-height: 1.3;
+  --font-size-headline-lg--font-weight: 700;
+
+  --font-size-headline-md: 24px;
+  --font-size-headline-md--line-height: 1.4;
+  --font-size-headline-md--font-weight: 600;
+
+  --font-size-body-lg: 18px;
+  --font-size-body-lg--line-height: 1.6;
+  --font-size-body-lg--font-weight: 400;
+
+  --font-size-body-md: 16px;
+  --font-size-body-md--line-height: 1.6;
+  --font-size-body-md--font-weight: 400;
+
+  --font-size-body-sm: 14px;
+  --font-size-body-sm--line-height: 1.5;
+  --font-size-body-sm--font-weight: 400;
+
+  --font-size-label-md: 14px;
+  --font-size-label-md--line-height: 1.2;
+  --font-size-label-md--letter-spacing: 0.05em;
+  --font-size-label-md--font-weight: 600;
+}
+
+@layer utilities {
+  .glass-panel {
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 193, 7, 0.15);
+  }
+  .glass-panel-hover {
+    transition: all 0.3s ease;
+  }
+  .glass-panel-hover:hover {
+    background: rgba(26, 36, 59, 0.85);
+    border-color: rgba(255, 193, 7, 0.4);
+    box-shadow: 0 10px 30px -10px rgba(255, 193, 7, 0.15);
+    transform: translateY(-4px);
+  }
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-on-background);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}

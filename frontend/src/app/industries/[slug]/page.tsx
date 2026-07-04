@@ -1,287 +1,196 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Link from "next/link";
-import LiveProofTicker from "@/components/layout/LiveProofTicker";
-import TopAppBar from "@/components/layout/TopAppBar";
-import Footer from "@/components/layout/Footer";
-import WhatsAppWidget from "@/components/layout/WhatsAppWidget";
+import { useParams } from "next/navigation";
 
-export async function generateStaticParams() {
-  return [
-    { slug: "real-estate" },
-    { slug: "jewellery" },
-    { slug: "hospitals-clinics" },
-    { slug: "restaurants" },
-    { slug: "gyms-fitness" },
-    { slug: "education" },
-    { slug: "car-dealerships" },
-    { slug: "fashion-retail" },
-    { slug: "manufacturing" },
-  ];
+interface IndustryData {
+  title: string;
+  badge: string;
+  hookHeadline: string;
+  hookSub: string;
+  leakTitle: string;
+  leakDesc: string;
+  leakStats: { label: string; val: string; desc: string }[];
+  steps: { title: string; time: string; desc: string }[];
 }
 
-interface PageProps {
-  params: Promise<{ slug: string }>;
-  searchParams: Promise<{ geo?: string; lang?: string }>;
-}
+const industryConfigs: Record<string, IndustryData> = {
+  "real-estate": {
+    title: "Real Estate & Property Builders",
+    badge: "3.2x Weekend Site Visits",
+    hookHeadline: "Stop Letting Hot Property Leads Turn Cold.",
+    hookSub: "Real estate teams using Agnostic AI close 3x more site visits by automating instant phone calls and WhatsApp qualification in under 30 seconds.",
+    leakTitle: "The Hidden Cost of Missed Calls (The Weekly Leak)",
+    leakDesc: "Out of 200 weekly Facebook & Google ad inquiries, over 170 go cold because internal sales teams take 4 to 24 hours to callback.",
+    leakStats: [
+      { label: "Wasted Ad Spend", val: "₹2.5L+", desc: "Monthly budget spent on leads that never get called back in time." },
+      { label: "Cold Conversion", val: "< 2%", desc: "Conversion rate when callbacks happen after 4 hours of inquiry." },
+      { label: "AI Response", val: "30 sec", desc: "Our Voice Bot calls inbound property leads while they are still on your website." },
+    ],
+    steps: [
+      { title: "Instant Voice Engagement", time: "00:30s", desc: "Within 30 seconds of form submission, our AI voice caller dials the prospect in natural Hindi or English." },
+      { title: "Smart Qualification", time: "01:15s", desc: "The bot verifies budget range, preferred BHK/location, and buying timeline, logging data directly into your CRM." },
+      { title: "Automated Site Visits", time: "02:00s", desc: "Qualified buyers receive instant WhatsApp calendar invites with Google Maps directions to the sales office." },
+    ],
+  },
+  "jewellery": {
+    title: "Luxury Jewellery Showrooms",
+    badge: "+45% Festive Repeat Revenue",
+    hookHeadline: "Turn One-Time Shoppers Into Lifetime VIP Clients.",
+    hookSub: "Jewellery retailers using Agnostic AI automate personalized WhatsApp festive collection invites and private showroom bookings.",
+    leakTitle: "The Unnurtured Showroom Walk-in Leak",
+    leakDesc: "Hundreds of high-intent buyers visit your showroom each month without buying, and manual follow-ups are inconsistent or non-existent.",
+    leakStats: [
+      { label: "Unnurtured Walk-ins", val: "80%", desc: "Of showroom visitors leave without making a purchase or booking a return date." },
+      { label: "Manual WhatsApp Open", val: "25%", desc: "Low engagement on generic broadcast messages from individual sales reps." },
+      { label: "AI Concierge Open", val: "92%", desc: "Open rate on personalized festive video catalogs sent by Agnostic AI." },
+    ],
+    steps: [
+      { title: "Walk-in Capture & Segmentation", time: "Instant", desc: "Customer details and jewelry preferences (Gold, Diamond, Polki) are captured via tablet at showroom exit." },
+      { title: "Automated VIP Nurture", time: "Day 3 & 7", desc: "AI sends tailored WhatsApp lookbooks and festival discount vouchers based on their specific taste." },
+      { title: "Private Appointment Booking", time: "On Demand", desc: "Clients reply on WhatsApp to reserve private viewing hours with their preferred senior sales executive." },
+    ],
+  },
+};
 
-export default async function IndustryDetailPage({ params, searchParams }: PageProps) {
-  const resolvedParams = await params;
-  const resolvedSearch = await searchParams;
+const defaultConfig: IndustryData = {
+  title: "Industry AI Automation Architecture",
+  badge: "3x Operational Efficiency",
+  hookHeadline: "Replace Manual Overhead With Autonomous Intelligence.",
+  hookSub: "Scale your industry workflows 24/7 without adding operational headcount or suffering from human response delays.",
+  leakTitle: "The Cost of Manual Operational Bottlenecks",
+  leakDesc: "Manual data entry, delayed customer callbacks, and fragmented follow-ups cost Indian MSMEs over 30% in lost annual revenue.",
+  leakStats: [
+    { label: "Manual Overhead", val: "35 hrs", desc: "Wasted per week on repetitive customer follow-ups and data sorting." },
+    { label: "Response Delay", val: "4 hrs+", desc: "Average time taken by human teams to reply to inbound web inquiries." },
+    { label: "AI Uptime SLA", val: "99.8%", desc: "Continuous autonomous execution across voice, chat, and email channels." },
+  ],
+  steps: [
+    { title: "Instant Lead & Query Capture", time: "00:05s", desc: "AI connects to your website forms, social ads, and WhatsApp API to intercept queries instantly." },
+    { title: "Autonomous Processing", time: "00:30s", desc: "Our core engine verifies customer intent, answers FAQs, and routes complex requests." },
+    { title: "Revenue Conversion", time: "01:30s", desc: "Qualified leads are booked into appointments, orders are processed, or tickets are resolved automatically." },
+  ],
+};
 
-  const slug = resolvedParams.slug;
-  const geo = resolvedSearch?.geo;
-  const lang = resolvedSearch?.lang;
-
-  // Industry-specific content mapping
-  const getIndustryData = () => {
-    switch (slug) {
-      case "real-estate":
-        return {
-          title: "Real Estate Developers & Brokers",
-          headline: geo
-            ? `Stop Losing Site-Visit Leads in ${geo.toUpperCase()}. Your AI Bot Qualifies Buyers 24/7.`
-            : "Stop Losing Site-Visit Leads. Your AI Bot Qualifies Property Buyers 24/7.",
-          subheadline: "Real estate agents and developers using our AI close 3x more deals by automating budget, BHK, and location qualification on WhatsApp.",
-          problem: "You spend ₹50,000 on Meta/Google ads. You get 200 inquiries. But your sales team can only call back 30 of them. The other 170 leads go cold after hours. That's ₹42,500 wasted every week.",
-          solution: "Our AI WhatsApp bot responds to every ad inquiry in 30 seconds. It asks budget, preferred location, and timeline. It books physical or virtual site visits directly into your calendar. You only talk to serious buyers.",
-          packagePrice: "₹14,999/month",
-          caseStudyTitle: `How a ${geo ? geo.charAt(0).toUpperCase() + geo.slice(1) : "Greater Noida"} Builder Reduced CPL by 55% in 60 Days`,
-          stat1: "55% Reduction in CPL",
-          stat2: "3x More Site Visits",
-          heroImage: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
-        };
-      case "jewellery":
-        return {
-          title: "Jewellery Showrooms & Retailers",
-          headline: geo
-            ? `Dhanteras & Wedding Rush in ${geo.toUpperCase()} is Here. Is Your WhatsApp Bot Ready?`
-            : "Dhanteras is Coming. Is Your WhatsApp Bot Ready to Handle 500 Inquiries in One Night?",
-          subheadline: "Showroom owners using Viraal AI automate catalog sharing, gold rate updates, and store visit bookings 24/7 in Hindi and regional languages.",
-          problem: "Customers message on WhatsApp asking for designs and today's gold rate at 9 PM. Your shop is closed. By morning, they have bought from a competitor who responded faster.",
-          solution: "Our automated WhatsApp showroom assistant instantly shares catalog PDFs, calculates making charges, and invites VIP buyers for a private showroom consultation.",
-          packagePrice: "₹12,999/month",
-          caseStudyTitle: `How Zaveri Jewellers in ${geo ? geo.toUpperCase() : "Surat"} Grew Walk-ins by 40% During Diwali`,
-          stat1: "40% More Walk-ins",
-          stat2: "24/7 Catalog Dispatch",
-          heroImage: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1200&q=80",
-        };
-      default:
-        const genericTitle = slug.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
-        return {
-          title: genericTitle,
-          headline: geo
-            ? `AI Automation for ${genericTitle} in ${geo.toUpperCase()}. Get 3x More Customers.`
-            : `AI Automation for ${genericTitle}. Automate Leads & Sales 24/7.`,
-          subheadline: `Join top ${genericTitle} leaders in India who have automated customer inquiries, follow-ups, and bookings without adding headcount.`,
-          problem: "Traditional businesses lose up to 60% of digital leads because human response times are too slow during weekends and evenings.",
-          solution: "Our custom WhatsApp AI assistant and autonomous voice agents respond to every inquiry in 30 seconds, qualifying intent before passing to your team.",
-          packagePrice: "₹14,999/month",
-          caseStudyTitle: `How a Leading ${genericTitle} Brand Scaled Revenue 3x with Viraal AI`,
-          stat1: "40% Lower Cost Per Lead",
-          stat2: "3x Conversion Velocity",
-          heroImage: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
-        };
-    }
-  };
-
-  const data = getIndustryData();
-  const waUrl = `https://wa.me/919876543210?text=${encodeURIComponent(
-    `Hi Viraal, I want to set up the AI Automation Bot for my ${data.title} business${geo ? ` in ${geo}` : ""}.`
-  )}`;
+export default function IndustryDetailPage() {
+  const params = useParams();
+  const slug = (params?.slug as string) || "real-estate";
+  const data = industryConfigs[slug] || defaultConfig;
 
   return (
-    <div className="min-h-screen flex flex-col bg-background text-on-background">
-      <LiveProofTicker />
-      <TopAppBar />
+    <div className="w-full pb-28 pt-12 px-6 max-w-[1280px] mx-auto">
+      {/* Breadcrumbs */}
+      <div className="mb-8 text-xs font-semibold text-on-surface-variant flex items-center gap-2">
+        <Link href="/" className="hover:text-primary">Home</Link>
+        <span>/</span>
+        <Link href="/industries" className="hover:text-primary">Industries</Link>
+        <span>/</span>
+        <span className="text-on-background capitalize">{slug.replace("-", " ")}</span>
+      </div>
 
-      <main className="flex-1 pt-8 pb-24">
-        {/* Ad Campaign Dynamic Banner */}
-        {geo && (
-          <div className="bg-primary/20 border-y border-primary/40 py-2.5 px-4 text-center text-xs font-mono font-bold text-primary animate-pulse">
-            📍 SPECIAL AD CAMPAIGN ACTIVE FOR {geo.toUpperCase()} • 14-DAY BOHONI PILOT ELIGIBLE
-          </div>
-        )}
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-16 sm:space-y-24">
-          
-          {/* Hero Section */}
-          <section className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-              <Link
-                href="/industries"
-                className="inline-flex items-center gap-1 text-xs font-mono text-tertiary hover:text-primary transition-colors"
-              >
-                <span className="material-symbols-outlined text-[16px]">arrow_back</span>
-                <span>All Industry Templates</span>
-              </Link>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-surface-container-high border border-primary/30 text-xs font-mono font-bold text-primary uppercase tracking-wider">
-                ⚡ {data.title} Template
-              </div>
-
-              <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-on-background leading-tight">
-                {data.headline}
-              </h1>
-
-              <p className="font-sans text-lg sm:text-xl text-on-surface-variant max-w-2xl leading-relaxed">
-                {data.subheadline}
-              </p>
-
-              <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                <a
-                  href={waUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full sm:w-auto bg-primary hover:bg-primary-fixed text-on-primary font-display font-extrabold text-base px-8 py-4 rounded-xl shadow-xl shadow-primary/25 hover:shadow-primary/40 active:scale-95 transition-all flex items-center justify-center gap-2"
-                >
-                  <span className="material-symbols-outlined text-[20px]">chat</span>
-                  <span>Set Up My {data.title.split(" ")[0]} Bot</span>
-                </a>
-                <Link
-                  href="/#roi-calculator"
-                  className="w-full sm:w-auto bg-surface hover:bg-surface-container text-on-surface border border-outline/40 font-display font-bold text-base px-8 py-4 rounded-xl transition-all flex items-center justify-center gap-2"
-                >
-                  <span>Estimate ROI Savings</span>
-                </Link>
-              </div>
-            </div>
-
-            {/* Hero Image / Floating UI overlay (From Stitch Real Estate design!) */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative h-[380px] sm:h-[480px] w-full rounded-3xl overflow-hidden shadow-2xl glass-panel group border border-primary/30">
-                <img
-                  src={data.heroImage}
-                  alt={data.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-85"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
-
-                {/* Floating Notification Card */}
-                <div className="absolute bottom-6 left-6 right-6 glass-panel p-5 rounded-2xl shadow-2xl border border-primary/40 animate-[bounce_3s_infinite]">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 bg-[#25D366] text-white rounded-full flex items-center justify-center shrink-0 shadow-md">
-                      <span className="material-symbols-outlined text-[22px]">forum</span>
-                    </div>
-                    <div>
-                      <h4 className="font-display font-bold text-sm text-on-background">New VIP Lead Qualified</h4>
-                      <p className="text-[11px] text-tertiary">Just now via Google Ads</p>
-                    </div>
-                  </div>
-                  <div className="bg-surface-container-low p-2.5 rounded-xl text-xs font-mono text-on-surface border border-outline/20">
-                    <div>🔥 Intent: High • Budget Verified</div>
-                    <div className="text-primary font-bold mt-1">✓ Site Visit / Demo Booked for Sat, 11 AM</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Problem vs Solution Grid */}
-          <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="p-8 rounded-3xl bg-error/5 border border-error/20 space-y-4">
-              <div className="text-xs font-mono font-bold uppercase text-error flex items-center gap-1.5">
-                <span className="material-symbols-outlined text-[18px]">warning</span>
-                <span>The Industry Problem</span>
-              </div>
-              <h3 className="font-display font-bold text-2xl text-on-background">
-                Why Your Ad Spend Is Leaking
-              </h3>
-              <p className="text-on-surface-variant leading-relaxed text-sm sm:text-base">
-                {data.problem}
-              </p>
-            </div>
-
-            <div className="p-8 rounded-3xl bg-success/5 border border-success/20 space-y-4">
-              <div className="text-xs font-mono font-bold uppercase text-success flex items-center gap-1.5">
-                <span className="material-symbols-outlined text-[18px]">auto_awesome</span>
-                <span>The Autonomous AI Solution</span>
-              </div>
-              <h3 className="font-display font-bold text-2xl text-on-background">
-                30-Second Qualification on Autopilot
-              </h3>
-              <p className="text-on-surface leading-relaxed text-sm sm:text-base">
-                {data.solution}
-              </p>
-            </div>
-          </section>
-
-          {/* Case Study Feature Section */}
-          <section className="glass-panel rounded-3xl p-8 sm:p-12 border border-outline/30 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-            <div className="md:col-span-7 space-y-4">
-              <span className="text-xs font-mono font-bold uppercase text-primary tracking-wider">📈 PASO Case Study</span>
-              <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-on-background leading-tight">
-                {data.caseStudyTitle}
-              </h2>
-              <p className="text-on-surface-variant text-sm sm:text-base leading-relaxed">
-                By deploying our customized WhatsApp qualification bot and AI voice follow-up system, this client eliminated after-hours lead loss and empowered their sales team to focus 100% of their time closing pre-verified high-value prospects.
-              </p>
-              <div className="pt-4 grid grid-cols-2 gap-6 border-t border-outline/20">
-                <div>
-                  <div className="font-display text-3xl font-extrabold text-primary">{data.stat1}</div>
-                  <div className="text-xs text-tertiary mt-0.5 font-mono">Verified Metric</div>
-                </div>
-                <div>
-                  <div className="font-display text-3xl font-extrabold text-success">{data.stat2}</div>
-                  <div className="text-xs text-tertiary mt-0.5 font-mono">Measurable Growth</div>
-                </div>
-              </div>
-            </div>
-            <div className="md:col-span-5 bg-surface-container p-6 rounded-2xl border border-primary/30 text-center space-y-4">
-              <span className="material-symbols-outlined text-primary text-[48px]">workspace_premium</span>
-              <h3 className="font-display font-bold text-lg text-on-background">Want Similar Results?</h3>
-              <p className="text-xs text-tertiary">We configure this exact workflow for your business during our 14-day Bohoni pilot.</p>
-              <a
-                href={waUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-3.5 rounded-xl bg-primary text-on-primary font-bold text-xs uppercase tracking-wider block shadow-md hover:bg-primary-fixed"
-              >
-                Claim This AI Pipeline
-              </a>
-            </div>
-          </section>
-
-          {/* Industry Package Card */}
-          <section className="max-w-xl mx-auto glass-panel p-8 sm:p-10 rounded-3xl border border-primary/40 text-center space-y-6 relative overflow-hidden">
-            <div className="h-2 w-full bg-primary absolute top-0 left-0" />
-            <span className="text-xs font-mono font-bold uppercase text-primary tracking-widest">Pre-Packaged Architecture</span>
-            <h3 className="font-display font-extrabold text-2xl text-on-background">{data.title} Suite</h3>
-            <div className="flex items-baseline justify-center gap-1">
-              <span className="font-mono text-4xl font-extrabold text-primary">{data.packagePrice}</span>
-              <span className="text-xs text-tertiary">/ billed monthly</span>
-            </div>
-            <ul className="text-left space-y-3 text-sm text-on-surface max-w-sm mx-auto border-y border-outline/20 py-6 font-sans">
-              <li className="flex items-center gap-2.5">
-                <span className="material-symbols-outlined text-success text-[18px]">check_circle</span>
-                <span>24/7 WhatsApp AI Assistant & Catalog</span>
-              </li>
-              <li className="flex items-center gap-2.5">
-                <span className="material-symbols-outlined text-success text-[18px]">check_circle</span>
-                <span>Instant Meta/Google Ad Lead Ingestion</span>
-              </li>
-              <li className="flex items-center gap-2.5">
-                <span className="material-symbols-outlined text-success text-[18px]">check_circle</span>
-                <span>Automated Calendar Appointment Booking</span>
-              </li>
-              <li className="flex items-center gap-2.5">
-                <span className="material-symbols-outlined text-success text-[18px]">check_circle</span>
-                <span>Daily GoHighLevel CRM White-Label Report</span>
-              </li>
-            </ul>
-            <a
-              href={waUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full py-4 rounded-xl bg-primary hover:bg-primary-fixed text-on-primary font-display font-extrabold text-base block shadow-xl shadow-primary/25"
-            >
-              Start 14-Day Bohoni Trial
-            </a>
-          </section>
-
+      {/* Hero Hook */}
+      <section className="text-center max-w-3xl mx-auto mb-20">
+        <span className="inline-block py-1.5 px-3.5 rounded-full bg-secondary/10 border border-secondary/20 text-secondary font-bold text-xs mb-4 uppercase tracking-widest">
+          {data.badge}
+        </span>
+        <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-on-background mb-4 leading-tight">
+          {data.hookHeadline}
+        </h1>
+        <p className="font-sans text-lg text-on-surface-variant leading-relaxed">
+          {data.hookSub}
+        </p>
+        <div className="mt-8 flex justify-center gap-4">
+          <Link
+            href="/audit"
+            className="bg-primary text-on-primary px-8 py-4 rounded-xl font-display font-bold text-sm uppercase tracking-wider shadow-lg hover:opacity-95 transition-all"
+          >
+            Get Free {data.title.split(" ")[0]} Audit
+          </Link>
+          <Link
+            href="/pricing"
+            className="bg-surface-container-lowest border border-outline-variant/60 text-on-background px-8 py-4 rounded-xl font-display font-bold text-sm uppercase tracking-wider hover:border-primary transition-all"
+          >
+            View Architecture Pricing
+          </Link>
         </div>
-      </main>
+      </section>
 
-      <Footer />
-      <WhatsAppWidget />
+      {/* Section 2: The Weekly Leak */}
+      <section className="bg-surface-container-lowest border border-outline-variant/40 rounded-3xl p-8 sm:p-12 shadow-sm mb-24">
+        <div className="max-w-3xl mb-10">
+          <span className="text-xs font-bold uppercase tracking-widest text-red-600 mb-1 block">
+            Operational Leak Analysis
+          </span>
+          <h2 className="font-display text-2xl sm:text-3xl font-bold text-on-background mb-3">
+            {data.leakTitle}
+          </h2>
+          <p className="text-sm text-on-surface-variant leading-relaxed">
+            {data.leakDesc}
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-outline-variant/20">
+          {data.leakStats.map((stat, idx) => (
+            <div key={idx} className="bg-surface-container-low p-6 rounded-2xl border border-outline-variant/30">
+              <span className="font-display font-extrabold text-3xl text-primary block mb-1">{stat.val}</span>
+              <h4 className="font-bold text-sm text-on-background mb-2">{stat.label}</h4>
+              <p className="text-xs text-on-surface-variant leading-relaxed">{stat.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Section 3: 3-Step Autonomous Pipeline */}
+      <section className="mb-24">
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <span className="text-xs font-bold uppercase tracking-widest text-secondary mb-1 block">
+            How The Engine Works
+          </span>
+          <h2 className="font-display text-3xl font-bold text-on-background">
+            3-Step Autonomous Conversion Pipeline
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+          {data.steps.map((step, idx) => (
+            <div
+              key={idx}
+              className="bg-surface-container-lowest border border-outline-variant/40 rounded-3xl p-8 shadow-sm relative flex flex-col justify-between hover:border-primary/40 transition-colors"
+            >
+              <div className="absolute -top-4 left-8 bg-primary text-on-primary text-xs font-bold px-3 py-1 rounded-full shadow-xs">
+                Step 0{idx + 1} • {step.time}
+              </div>
+
+              <div className="mt-4">
+                <h3 className="font-display font-bold text-xl text-on-background mb-3">{step.title}</h3>
+                <p className="text-sm text-on-surface-variant leading-relaxed">{step.desc}</p>
+              </div>
+
+              <div className="mt-8 pt-4 border-t border-outline-variant/20 flex items-center justify-between text-xs font-semibold text-secondary">
+                <span>Autonomous Execution</span>
+                <span className="material-symbols-outlined text-sm">bolt</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CTA Box */}
+      <section className="bg-surface-container-low border border-outline-variant/40 rounded-3xl p-10 text-center max-w-3xl mx-auto">
+        <h3 className="font-display font-bold text-2xl text-on-background mb-3">
+          Ready to Deploy This Architecture for {data.title}?
+        </h3>
+        <p className="text-sm text-on-surface-variant max-w-xl mx-auto mb-8">
+          We can integrate our voice agents and WhatsApp bots with your existing CRM and ad accounts in less than 5 business days.
+        </p>
+        <Link
+          href="/audit"
+          className="inline-block bg-primary text-on-primary px-8 py-4 rounded-xl font-display font-bold text-xs uppercase tracking-wider shadow-md hover:opacity-95 transition-all"
+        >
+          Book Technical Architecture Session
+        </Link>
+      </section>
     </div>
   );
 }

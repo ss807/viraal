@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Agnostic AI - AI-Powered Growth. Real Results.</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Montserrat:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-container": "#90efef",
+                      "surface-container": "#edeeef",
+                      "on-tertiary-fixed-variant": "#474746",
+                      "on-surface-variant": "#4d4635",
+                      "surface-dim": "#d9dadb",
+                      "secondary-fixed": "#93f2f2",
+                      "primary": "#735c00",
+                      "tertiary-fixed-dim": "#c8c6c5",
+                      "on-primary-fixed": "#241a00",
+                      "surface-container-high": "#e7e8e9",
+                      "surface-container-low": "#f3f4f5",
+                      "on-error": "#ffffff",
+                      "secondary": "#006a6a",
+                      "on-background": "#191c1d",
+                      "on-primary-fixed-variant": "#574500",
+                      "on-surface": "#191c1d",
+                      "secondary-fixed-dim": "#76d6d5",
+                      "inverse-primary": "#e9c349",
+                      "error": "#ba1a1a",
+                      "surface-container-highest": "#e1e3e4",
+                      "on-primary": "#ffffff",
+                      "tertiary-container": "#b4b2b2",
+                      "on-primary-container": "#554300",
+                      "outline": "#7f7663",
+                      "error-container": "#ffdad6",
+                      "background": "#f8f9fa",
+                      "on-secondary-fixed-variant": "#004f4f",
+                      "surface-variant": "#e1e3e4",
+                      "inverse-surface": "#2e3132",
+                      "on-secondary-container": "#006e6e",
+                      "primary-container": "#d4af37",
+                      "outline-variant": "#d0c5af",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-fixed": "#e5e2e1",
+                      "surface": "#f8f9fa",
+                      "primary-fixed": "#ffe088",
+                      "primary-fixed-dim": "#e9c349",
+                      "on-secondary": "#ffffff",
+                      "on-tertiary-fixed": "#1c1b1b",
+                      "on-error-container": "#93000a",
+                      "on-secondary-fixed": "#002020",
+                      "on-tertiary-container": "#454544",
+                      "surface-bright": "#f8f9fa",
+                      "tertiary": "#5f5e5e",
+                      "surface-tint": "#735c00",
+                      "inverse-on-surface": "#f0f1f2"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-desktop": "64px",
+                      "base": "8px",
+                      "gutter": "24px",
+                      "stack-md": "16px",
+                      "stack-lg": "32px",
+                      "section-gap": "80px",
+                      "container-max-width": "1280px",
+                      "stack-sm": "8px",
+                      "margin-mobile": "20px"
+              },
+              "fontFamily": {
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "display-lg-mobile": [
+                              "Montserrat"
+                      ],
+                      "headline-lg": [
+                              "Montserrat"
+                      ],
+                      "display-lg": [
+                              "Montserrat"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Montserrat"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Montserrat"
+                      ]
+              },
+              "fontSize": {
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+        .ticker-wrap {
+            overflow: hidden;
+            white-space: nowrap;
+            box-sizing: border-box;
+        }
+        .ticker {
+            display: inline-block;
+            animation: ticker 30s linear infinite;
+        }
+        @keyframes ticker {
+            0% { transform: translate3d(100%, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased pt-20">
+<!-- Live Proof Ticker -->
+<div class="bg-primary text-on-primary py-2 w-full z-50 fixed top-0 left-0 ticker-wrap font-label-md text-label-md">
+<div class="ticker">
+<span class="mx-4">🔥 5 new leads generated for TechCorp in the last hour.</span>
+<span class="mx-4">✅ Sarah's Boutique increased conversions by 22% this week.</span>
+<span class="mx-4">📈 $10k+ revenue recovered by our AI agents yesterday.</span>
+<span class="mx-4">🚀 Next-Gen AI audit completed for global manufacturing firm.</span>
+</div>
+</div>
+<!-- TopNavBar -->
+<nav class="bg-surface/80 dark:bg-surface-container-highest/80 backdrop-blur-xl border-b border-outline-variant/30 dark:border-outline/20 shadow-md dark:shadow-none fixed top-8 left-0 w-full z-40 flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 max-w-container-max-width mx-auto">
+<div class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed-dim">
+            Agnostic AI
+        </div>
+<div class="hidden md:flex gap-gutter">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-secondary transition-colors font-label-md text-label-md hover:bg-surface-container-low/50 dark:hover:bg-surface-container-high/50 transition-all duration-300 px-3 py-2 rounded" href="#">Solutions</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-secondary transition-colors font-label-md text-label-md hover:bg-surface-container-low/50 dark:hover:bg-surface-container-high/50 transition-all duration-300 px-3 py-2 rounded" href="#">Case Studies</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-secondary transition-colors font-label-md text-label-md hover:bg-surface-container-low/50 dark:hover:bg-surface-container-high/50 transition-all duration-300 px-3 py-2 rounded" href="#">Pricing</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-secondary transition-colors font-label-md text-label-md hover:bg-surface-container-low/50 dark:hover:bg-surface-container-high/50 transition-all duration-300 px-3 py-2 rounded" href="#">About</a>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-md">
+            Free AI Audit
+        </button>
+</nav>
+<!-- Hero Section -->
+<section class="px-margin-mobile md:px-margin-desktop py-section-gap max-w-container-max-width mx-auto grid grid-cols-1 md:grid-cols-2 gap-gutter items-center mt-12">
+<div class="flex flex-col gap-stack-lg">
+<h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-on-background">
+                AI-Powered Growth. Real Results.
+            </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                We build intelligent AI systems that automate operations, scale customer acquisition, and drive measurable revenue for forward-thinking enterprises.
+            </p>
+<div class="flex gap-stack-md">
+<button class="bg-primary text-on-primary px-8 py-3 rounded-lg font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-md">
+                    Start Your Transformation
+                </button>
+<button class="border border-secondary text-secondary px-8 py-3 rounded-lg font-label-md text-label-md hover:bg-secondary hover:text-on-secondary transition-colors">
+                    Watch VSL
+                </button>
+</div>
+<div class="flex items-center gap-2 mt-4">
+<div class="flex -space-x-2">
+<img class="w-8 h-8 rounded-full border-2 border-surface object-cover" data-alt="A small circular portrait of a professional smiling person in a bright office setting, high key lighting, light mode aesthetic, pristine clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEs-qjgkvierUq3Tqxj7IyRrzqDNbWniNHdjpNxO4kZlvt0IGjeJ643EAMTVSWdTug_w687p9_fyMv76YbF4M5Q5xw0JRu4ERd0ZislA6DStEhPJK_4G8-e5zOhhqaCfexdfRiGFj1ZXMMQGuqcmmu3ctMkzu0jB-zZ-xWBITs-IF75VBhFtCrEieULXsWIoVooxlFu4fvpjppHMfQyVrsuVDqjDWMoOJJ6wawETHQJuRfx8AaV4oP2FrFpq_ZOsujc6-23Le9vB5w"/>
+<img class="w-8 h-8 rounded-full border-2 border-surface object-cover" data-alt="A small circular portrait of a professional looking at the camera in a modern co-working space, light mode aesthetic, soft shadows, high quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCn6A_OW6OILTlBDCJVjCsGVvI4aFFOaxiY4lOk2PTdQsfY7_ADnC8LqITjKvzDuKm63shN2zOM5N6Rs13K9ZHy8-icG0fIkhBdumXa2PoU-3YFPzZWynmSrXyIoTjyY-IE3XC_75g610bp_GgdTM-VcxM-pLQmh4DnDpf0e2rj6PEsWKOLJWPsZaqWli6zfF_HYE3MCqQiN70kbFMPcuoWJFKLfawwYzfepk3qkStht_rPzDYFwvEqiZ0-t_yv5sgDgmwgxN0g8lq5"/>
+<img class="w-8 h-8 rounded-full border-2 border-surface object-cover" data-alt="A small circular portrait of a confident tech leader, bright lighting, light mode aesthetic, corporate professional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkkoTS8hV58Cqu8yAO7I6yl3wyeZ0lbjyaiU3SOwBdYdvcEyu_NM00t9FnXGb3NfMLJ1N22zG5F8sKVCGAwp9xzjNEMBkVMYr4fMvPYbIc1ZrSQWboH51z4haCuWQFnUQZnfBsoD-pdXfedRZRUMEFAU5i5yXKX4KZtUMq69A7lO_zwX4ALOuGJsm_DfIn6jOYAi3h6esQ7hLd04vSjWC5UmMf2-cfSTuPqw1eQ20cEY3B4r6Q4hTGvJ24WRul02R-wbHYO2E-h-up"/>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant ml-2">Trusted by 500+ enterprises.</span>
+</div>
+</div>
+<div class="glass-card rounded-xl p-4 overflow-hidden relative group">
+<img class="w-full h-auto rounded-lg object-cover" data-alt="A sleek, modern video player interface showing a corporate presentation, bright light mode aesthetic, pristine white and soft gold accents, high-end professional production." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDu-zkz9Ce0Xb4bCgW_cPyw8AnOfMXndOaDQsSzNR_KR7crOrmJb6FbZZnJWa6nsGLysmnab8WEIf5RJ46Wr1Dc63-T_LZeiV72ScwWzhCnVAKJJRA-15858Zx0nxnwtVuFjfGFM9PwbNx1IkcTd4_Vns7PpQOE2tKSLbByLGLCNaVoVQB9cNttTfggq4EgLk4BuGole7LpjLorp0daHS74NIrI_8Pk9MjdvPBhNWcNXa7hvxBkzEwYH1yYeOwxeYMBDubmpWKKaQdu"/>
+<div class="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/20 transition-colors cursor-pointer rounded-lg">
+<div class="bg-white/80 backdrop-blur-sm rounded-full p-4 text-primary hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Trust Bar -->
+<section class="border-y border-outline-variant/20 bg-surface-container-lowest py-8">
+<div class="max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop">
+<p class="text-center font-label-md text-label-md text-on-surface-variant mb-6 uppercase tracking-widest">Certified &amp; Trusted By</p>
+<div class="flex flex-wrap justify-center gap-12 items-center opacity-60 grayscale hover:grayscale-0 transition-all duration-300">
+<span class="font-headline-md text-headline-md font-bold text-on-surface">META</span>
+<span class="font-headline-md text-headline-md font-bold text-on-surface">GOOGLE</span>
+<span class="font-headline-md text-headline-md font-bold text-on-surface">GeM</span>
+<span class="font-headline-md text-headline-md font-bold text-on-surface">UDYAM</span>
+</div>
+</div>
+</section>
+<!-- Services Grid -->
+<section class="px-margin-mobile md:px-margin-desktop py-section-gap max-w-container-max-width mx-auto">
+<div class="text-center mb-12">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-background mb-4">Intelligent Automation Infrastructure</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl mx-auto">Deploy specialized AI agents designed to handle complex workflows with precision and authority.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Service Card 1 -->
+<div class="glass-card rounded-xl p-6 hover:-translate-y-1 transition-transform duration-300">
+<div class="w-12 h-12 bg-primary-container/20 rounded-lg flex items-center justify-center text-primary mb-6">
+<span class="material-symbols-outlined">call</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-3">Voice Agents</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Conversational AI that handles inbound support and outbound sales calls with human-like nuance.</p>
+<a class="font-label-md text-label-md text-secondary hover:underline flex items-center gap-1" href="#">Learn more <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+<!-- Service Card 2 -->
+<div class="glass-card rounded-xl p-6 hover:-translate-y-1 transition-transform duration-300">
+<div class="w-12 h-12 bg-primary-container/20 rounded-lg flex items-center justify-center text-primary mb-6">
+<span class="material-symbols-outlined">forum</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-3">Smart Chatbots</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Context-aware text agents integrated across platforms to qualify leads and resolve queries instantly.</p>
+<a class="font-label-md text-label-md text-secondary hover:underline flex items-center gap-1" href="#">Learn more <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+<!-- Service Card 3 -->
+<div class="glass-card rounded-xl p-6 hover:-translate-y-1 transition-transform duration-300">
+<div class="w-12 h-12 bg-primary-container/20 rounded-lg flex items-center justify-center text-primary mb-6">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-3">Predictive Analytics</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Deep learning models that forecast trends, optimize pricing, and identify hidden revenue opportunities.</p>
+<a class="font-label-md text-label-md text-secondary hover:underline flex items-center gap-1" href="#">Learn more <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-inverse-surface border-t border-outline-variant/20 w-full py-stack-lg px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-2 gap-gutter max-w-container-max-width mx-auto">
+<div>
+<div class="text-headline-sm font-headline-sm font-bold text-primary mb-4">
+                Agnostic AI
+             </div>
+<p class="font-body-sm text-body-sm text-on-surface-variant/80">© 2024 Agnostic AI. Empowering MSMEs with Authority.</p>
+</div>
+<div class="flex flex-wrap gap-4 md:justify-end items-start">
+<a class="text-on-surface-variant/80 hover:text-primary hover:underline transition-all font-label-md text-label-md" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant/80 hover:text-primary hover:underline transition-all font-label-md text-label-md" href="#">Terms of Service</a>
+<a class="text-on-surface-variant/80 hover:text-primary hover:underline transition-all font-label-md text-label-md" href="#">Support Center</a>
+<a class="text-on-surface-variant/80 hover:text-primary hover:underline transition-all font-label-md text-label-md" href="#">Contact Us</a>
+<a class="text-on-surface-variant/80 hover:text-primary hover:underline transition-all font-label-md text-label-md" href="#">LinkedIn</a>
+</div>
+</footer>
+</body></html>

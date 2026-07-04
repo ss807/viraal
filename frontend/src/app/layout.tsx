@@ -1,6 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Montserrat, Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import { LiveProofTicker } from "@/components/layout/LiveProofTicker";
+import { TopAppBar } from "@/components/layout/TopAppBar";
+import { Footer } from "@/components/layout/Footer";
+import { WhatsAppWidget } from "@/components/layout/WhatsAppWidget";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -27,16 +31,16 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#0A0F1C",
+  themeColor: "#f8f9fa",
 };
 
 export const metadata: Metadata = {
-  title: "Viraal | AI Automation Marketing Agency for Indian MSMEs",
-  description: "Automate your lead generation, customer support, and sales 24/7 with custom WhatsApp bots and AI voice agents. Get 3x more customers starting at just ₹4,999/mo.",
-  keywords: ["AI Marketing Agency", "WhatsApp Automation India", "AI Chatbot for Business", "Real Estate AI Bot", "Jewellery Store Marketing"],
+  title: "Agnostic AI | Viraal - AI Automation Engine for Indian MSMEs",
+  description: "Automate your lead generation, customer support, and sales 24/7 with custom WhatsApp bots and AI voice agents. Proven methodologies with 99.8% Uptime SLA.",
+  keywords: ["AI Marketing Agency", "WhatsApp Automation India", "AI Voice Caller", "Real Estate AI Bot", "Agnostic AI", "Viraal"],
   openGraph: {
-    title: "Viraal | 24/7 AI Lead Generation Engine",
-    description: "Experience AI Voice Calls and WhatsApp Automation live. Transform your business today.",
+    title: "Agnostic AI | Verifiable Excellence. Absolute Trust.",
+    description: "Experience AI Voice Calls and WhatsApp Automation live. Over 500+ businesses scaled this year.",
     type: "website",
     locale: "en_IN",
   },
@@ -50,7 +54,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${montserrat.variable} ${inter.variable} ${spaceGrotesk.variable} h-full antialiased dark`}
+      className={`${montserrat.variable} ${inter.variable} ${spaceGrotesk.variable} h-full antialiased light`}
     >
       <head>
         <link
@@ -58,8 +62,14 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         />
       </head>
-      <body className="min-h-full flex flex-col bg-background text-on-background selection:bg-primary selection:text-on-primary">
-        {children}
+      <body className="min-h-full flex flex-col bg-background text-on-background selection:bg-primary selection:text-on-primary font-sans">
+        <LiveProofTicker />
+        <TopAppBar />
+        <main className="flex-grow w-full relative">
+          {children}
+        </main>
+        <Footer />
+        <WhatsAppWidget />
       </body>
     </html>
   );

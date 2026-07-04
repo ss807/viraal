@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Viraal - Real Estate AI Bot</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#006e6e",
+                    "tertiary": "#5f5e5e",
+                    "primary-container": "#d4af37",
+                    "primary": "#735c00",
+                    "error-container": "#ffdad6",
+                    "on-primary": "#ffffff",
+                    "on-background": "#191c1d",
+                    "on-primary-fixed": "#241a00",
+                    "error": "#ba1a1a",
+                    "background": "#f8f9fa",
+                    "surface-container-highest": "#e1e3e4",
+                    "on-tertiary-container": "#454544",
+                    "secondary": "#006a6a",
+                    "secondary-fixed": "#93f2f2",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed-dim": "#c8c6c5",
+                    "inverse-primary": "#e9c349",
+                    "on-error-container": "#93000a",
+                    "primary-fixed-dim": "#e9c349",
+                    "on-primary-container": "#554300",
+                    "on-secondary-fixed-variant": "#004f4f",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-high": "#e7e8e9",
+                    "surface": "#f8f9fa",
+                    "surface-container": "#edeeef",
+                    "on-tertiary-fixed-variant": "#474746",
+                    "on-error": "#ffffff",
+                    "secondary-container": "#90efef",
+                    "primary-fixed": "#ffe088",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed": "#e5e2e1",
+                    "outline": "#7f7663",
+                    "on-tertiary-fixed": "#1c1b1b",
+                    "surface-variant": "#e1e3e4",
+                    "on-surface": "#191c1d",
+                    "on-primary-fixed-variant": "#574500",
+                    "on-surface-variant": "#4d4635",
+                    "inverse-on-surface": "#f0f1f2",
+                    "inverse-surface": "#2e3132",
+                    "tertiary-container": "#b4b2b2",
+                    "surface-bright": "#f8f9fa",
+                    "surface-tint": "#735c00",
+                    "on-secondary-fixed": "#002020",
+                    "surface-dim": "#d9dadb",
+                    "secondary-fixed-dim": "#76d6d5",
+                    "outline-variant": "#d0c5af",
+                    "surface-container-low": "#f3f4f5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-sm": "8px",
+                    "section-gap": "80px",
+                    "base": "8px",
+                    "margin-desktop": "64px",
+                    "stack-md": "16px",
+                    "margin-mobile": "20px",
+                    "container-max-width": "1280px",
+                    "stack-lg": "32px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "display-lg-mobile": ["Montserrat", "sans-serif"],
+                    "headline-md": ["Montserrat", "sans-serif"],
+                    "body-lg": ["Inter", "sans-serif"],
+                    "body-md": ["Inter", "sans-serif"],
+                    "label-md": ["Inter", "sans-serif"],
+                    "headline-lg-mobile": ["Montserrat", "sans-serif"],
+                    "headline-lg": ["Montserrat", "sans-serif"],
+                    "display-lg": ["Montserrat", "sans-serif"],
+                    "body-sm": ["Inter", "sans-serif"]
+            },
+            "fontSize": {
+                    "display-lg-mobile": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-md": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}]
+            }
+          },
+        }
+      }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased overflow-x-hidden">
+<!-- LiveProofTicker -->
+<div class="bg-primary-fixed text-on-primary-fixed font-label-md text-label-md fixed top-0 w-full z-50 h-8 flex items-center justify-center overflow-hidden whitespace-nowrap shadow-sm">
+<span class="text-on-primary-fixed font-bold mr-4">Just booked:</span> Site visit in Greater Noida • 2 mins ago <span class="mx-4 text-primary opacity-50">|</span> <span class="text-on-primary-fixed font-bold mr-4">New Lead:</span> 3BHK requirement, Gurgaon • 5 mins ago
+    </div>
+<!-- TopAppBar -->
+<header class="w-full sticky top-8 z-40 bg-background/80 backdrop-blur-xl border-b border-outline-variant/20 shadow-2xl transition-all duration-300" id="topAppBar">
+<div class="flex justify-between items-center max-w-container-max mx-auto px-gutter py-4">
+<div class="font-display-lg text-headline-md font-extrabold text-primary md:font-display-lg md:text-display-lg">Agnostic AI</div>
+<nav aria-label="Main Navigation" class="hidden md:flex gap-8 items-center">
+<a class="text-on-surface-variant font-body-md text-body-md hover:text-primary transition-colors duration-300" href="#">Solutions</a>
+<a class="text-primary border-b-2 border-primary pb-1 font-body-md text-body-md hover:text-primary transition-colors duration-300" href="#">Industries</a>
+<a class="text-on-surface-variant font-body-md text-body-md hover:text-primary transition-colors duration-300" href="#">Pricing</a>
+<a class="text-on-surface-variant font-body-md text-body-md hover:text-primary transition-colors duration-300" href="#">Trust Center</a>
+<a class="text-on-surface-variant font-body-md text-body-md hover:text-primary transition-colors duration-300" href="#">AI Education Hub</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="hidden md:block text-primary font-label-md text-label-md hover:text-primary-container transition-colors">Login</button>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-DEFAULT font-label-md text-label-md active:scale-95 transition-transform hover:shadow-lg shadow-black/5">Free AI Audit</button>
+</div>
+</div>
+</header>
+<main class="pt-section-gap pb-section-gap">
+<!-- Hero Section -->
+<section class="max-w-container-max mx-auto px-gutter md:px-margin-desktop mb-section-gap">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter items-center min-h-[716px]">
+<div class="space-y-stack-lg z-10 relative">
+<span class="inline-flex items-center gap-2 bg-surface-container-high px-4 py-2 rounded-full font-label-md text-label-md text-tertiary">
+<span class="material-symbols-outlined text-[16px] text-primary" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+                        Real Estate AI Automation
+                    </span>
+<h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-on-background">
+                        Stop Losing Site-Visit Leads. <br/>
+<span class="text-primary relative inline-block">
+                            Your AI Bot Qualifies Property Buyers 24/7.
+                            <svg class="absolute w-full h-3 -bottom-1 left-0 text-primary-container opacity-50" fill="none" viewbox="0 0 200 9" xmlns="http://www.w3.org/2000/svg"><path d="M2.00035 6.3888C43.239 3.03212 119.82 -2.1488 198.001 5.92211" stroke="currentColor" stroke-linecap="round" stroke-width="3"></path></svg>
+</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+                        Instantly engage prospects, verify budget, and schedule site visits on WhatsApp while you sleep. Built exclusively for Indian real estate developers and channel partners.
+                    </p>
+<div class="flex flex-col sm:flex-row gap-4 pt-stack-sm">
+<button class="bg-primary text-on-primary px-8 py-4 rounded-lg font-label-md text-label-md shadow-lg shadow-primary/20 hover:-translate-y-1 transition-all duration-300 flex justify-center items-center gap-2">
+                            Set Up My Real Estate AI Bot
+                            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="border border-outline-variant text-on-surface px-8 py-4 rounded-lg font-label-md text-label-md hover:bg-surface-container-low transition-colors duration-300 flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[#25D366]">chat</span>
+                            See Live Demo
+                        </button>
+</div>
+</div>
+<div class="relative h-[400px] md:h-[600px] w-full rounded-xl overflow-hidden shadow-2xl glass-panel group">
+<img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A modern, high-end luxury apartment building exterior in bright daylight, rendered in a corporate modern style with a light mode aesthetic. The building features large glass windows and elegant geometric architecture. Soft, diffused lighting enhances the premium feel, with subtle gold highlights reflecting off the glass. The scene conveys high trust, wealth, and professional real estate success. 8k resolution, photorealistic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBg5G0QBZfR-lL5Iev0MqO8MCTv_3eVK3jIKrc51QSDrzCOKKZhTLg_uTm7j5M2kKN1g71LR3pu41La2wdc4Pk8QBbkiw4SJQsh78nzEHEnx6p1jqums7_4PIakPRQhHsGy_SLg_rirnMTVRgXlipPtytkt1sDGqM2ZqYA8SX_w4IFDWOuks8DTf3GrgArOYsFyh9pltFRoFL2YmFfSjlooCwkEaxfSXLdQM4xaNu25fJEnyP4bpFYzHk3TssWuWV-PjmGDIDSouJd7"/>
+<!-- Floating UI Card Overlay -->
+<div class="absolute bottom-8 left-8 right-8 md:right-auto md:w-80 glass-panel p-6 rounded-lg shadow-xl translate-y-4 opacity-0 animate-[slideUp_0.8s_ease-out_0.5s_forwards]">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 bg-[#25D366]/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-[#25D366]" style="font-variation-settings: 'FILL' 1;">forum</span>
+</div>
+<div>
+<h4 class="font-headline-md text-body-md md:font-headline-md md:text-headline-md text-on-background">New Lead Qualified</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Just now</p>
+</div>
+</div>
+<div class="space-y-3">
+<div class="bg-surface-container-low p-3 rounded-DEFAULT text-body-sm font-body-sm text-on-surface border border-outline-variant/30">
+<strong>Budget:</strong> ₹1.5Cr - ₹2Cr
+                            </div>
+<div class="bg-surface-container-low p-3 rounded-DEFAULT text-body-sm font-body-sm text-on-surface border border-outline-variant/30">
+<strong>Location:</strong> Golf Course Ext.
+                            </div>
+<div class="flex items-center gap-2 text-primary font-label-md text-label-md mt-2">
+<span class="material-symbols-outlined text-[18px]">event_available</span>
+                                Site Visit Booked for Sat, 11 AM
+                            </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Problem Section -->
+<section class="bg-surface-container-lowest py-section-gap border-y border-outline-variant/20">
+<div class="max-w-container-max mx-auto px-gutter md:px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+<div class="md:col-span-5 space-y-stack-md">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-background">The Hidden Cost of Missed Calls</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                            Every missed call after hours is a lost site visit. Ad campaigns drive traffic, but slow response times kill conversions.
+                        </p>
+<div class="glass-panel p-6 rounded-lg border-l-4 border-error relative overflow-hidden mt-stack-lg">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-error/5 rounded-full blur-xl"></div>
+<h3 class="font-headline-md text-headline-md text-error mb-2">The Weekly Leak</h3>
+<ul class="space-y-2 font-body-md text-body-md text-on-surface">
+<li class="flex justify-between border-b border-outline-variant/20 pb-2"><span>Ad Spend:</span> <span class="font-bold text-on-background">₹50,000</span></li>
+<li class="flex justify-between border-b border-outline-variant/20 pb-2"><span>Leads Generated:</span> <span class="font-bold text-on-background">150</span></li>
+<li class="flex justify-between border-b border-outline-variant/20 pb-2"><span>Calls Answered:</span> <span class="font-bold text-error">Only 30</span></li>
+<li class="flex justify-between pt-2"><span>Wasted Spend:</span> <span class="font-bold text-error text-lg">₹42,000</span></li>
+</ul>
+</div>
+</div>
+<div class="md:col-span-6 md:col-start-7 relative">
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-4 pt-12">
+<div class="bg-surface p-6 rounded-xl border border-outline-variant/30 shadow-sm flex flex-col items-center text-center">
+<div class="w-16 h-16 bg-error-container text-on-error-container rounded-full flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-[32px]">phone_missed</span>
+</div>
+<h4 class="font-label-md text-label-md text-on-background mb-1">Missed Opportunities</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">65% of leads try to contact outside business hours.</p>
+</div>
+<div class="bg-surface p-6 rounded-xl border border-outline-variant/30 shadow-sm flex flex-col items-center text-center">
+<div class="w-16 h-16 bg-surface-container-highest text-tertiary rounded-full flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-[32px]">hourglass_empty</span>
+</div>
+<h4 class="font-label-md text-label-md text-on-background mb-1">Slow Response</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Lead viability drops 10x if not contacted within 5 minutes.</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="bg-surface p-6 rounded-xl border border-outline-variant/30 shadow-sm flex flex-col items-center text-center">
+<div class="w-16 h-16 bg-surface-container-highest text-tertiary rounded-full flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-[32px]">filter_alt_off</span>
+</div>
+<h4 class="font-label-md text-label-md text-on-background mb-1">Junk Leads</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Sales team wastes hours calling unqualified numbers.</p>
+</div>
+<div class="h-48 rounded-xl overflow-hidden shadow-md">
+<img class="w-full h-full object-cover" data-alt="A close-up abstract view of a frustrated sales agent looking at a smartphone screen, depicting lost real estate leads. The aesthetic is corporate modern light mode, using a muted color palette of cool grays and deep charcoal, with a subtle red accent implying error or loss. Soft, ambient lighting creates a cinematic depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5d0XeR8HbGrFPgZhJLxSrvMZh59pZoK69fho6ndqwOboOosOSFVZokAmRL4wloZ7FrPQXlmopKBsslni4Jc6pr4qBBFBaQsxYy99XRepaulb6sDZmFJt5w35Cgc5IBeujrhK855ugb8qUDyitliipMqeS4wLfjGHP3j0UPcj_lTUvgA8thYm2iaaY_lya3CBeAZFirU06CCc64Uz9p9ySW-Iwa8_nko_qOSK7apXlWgeo4nY_drn_c_vToyegC7bEnunS7WWzkiuh"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Solution Section -->
+<section class="py-section-gap relative overflow-hidden">
+<div class="absolute inset-0 bg-primary/5 pointer-events-none"></div>
+<div class="max-w-container-max mx-auto px-gutter md:px-margin-desktop relative z-10">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-background mb-4">Engage. Qualify. Convert. <br/> <span class="text-primary">In 30 Seconds.</span></h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Deploy an intelligent WhatsApp assistant that acts as your top-performing pre-sales executive, 24/7/365.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Feature 1 -->
+<div class="glass-panel p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300">
+<div class="w-14 h-14 bg-primary-container/20 rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary text-[28px]">bolt</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-3">Instant Engagement</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Responds to Meta/Google ad leads within 30 seconds via WhatsApp, capturing intent while it's highest.</p>
+</div>
+<!-- Feature 2 -->
+<div class="glass-panel p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300 relative">
+<div class="absolute -top-4 -right-4 bg-primary text-on-primary font-label-md text-label-md px-3 py-1 rounded-full shadow-md">Key Feature</div>
+<div class="w-14 h-14 bg-primary-container/20 rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary text-[28px]">rule</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-3">Smart Qualification</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Conversational AI naturally asks about budget, BHK preference, and location before passing to sales.</p>
+</div>
+<!-- Feature 3 -->
+<div class="glass-panel p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300">
+<div class="w-14 h-14 bg-primary-container/20 rounded-full flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary text-[28px]">calendar_month</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-3">Automated Site Visits</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Integrates with your CRM calendar to book physical or virtual site visits directly within the chat.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Package / Pricing Section -->
+<section class="py-section-gap bg-surface-container-lowest">
+<div class="max-w-container-max mx-auto px-gutter md:px-margin-desktop flex flex-col items-center">
+<div class="text-center mb-12">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-background">Simple, Transparent Pricing</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-2">Scale your real estate sales without scaling your headcount.</p>
+</div>
+<div class="w-full max-w-lg glass-panel rounded-2xl border border-primary/20 shadow-xl relative overflow-hidden">
+<div class="h-2 w-full bg-primary absolute top-0 left-0"></div>
+<div class="p-8 md:p-12 text-center border-b border-outline-variant/20">
+<h3 class="font-headline-md text-headline-md text-on-background mb-2">Real Estate Lead Automation</h3>
+<div class="flex items-baseline justify-center gap-1 mt-4">
+<span class="font-body-lg text-body-lg text-on-surface-variant">₹</span>
+<span class="font-display-lg text-display-lg text-on-background font-bold">14,999</span>
+<span class="font-body-md text-body-md text-on-surface-variant">/mo</span>
+</div>
+<p class="font-body-sm text-body-sm text-tertiary mt-2">Billed annually. Custom integrations available.</p>
+</div>
+<div class="p-8 md:p-12 bg-surface">
+<ul class="space-y-4 font-body-md text-body-md text-on-surface mb-8">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5">check_circle</span>
+                                24/7 WhatsApp AI Bot
+                            </li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5">check_circle</span>
+                                Infinite Concurrent Chats
+                            </li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5">check_circle</span>
+                                Budget &amp; Location Qualification
+                            </li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5">check_circle</span>
+                                CRM &amp; Calendar Integration
+                            </li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5">check_circle</span>
+                                Daily Analytics Dashboard
+                            </li>
+</ul>
+<button class="w-full bg-primary text-on-primary py-4 rounded-lg font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-md">
+                            Get Started Today
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Case Study Section -->
+<section class="py-section-gap">
+<div class="max-w-container-max mx-auto px-gutter md:px-margin-desktop">
+<div class="bg-surface-container-high rounded-2xl overflow-hidden shadow-lg border border-outline-variant/30 flex flex-col md:flex-row">
+<div class="md:w-2/5 relative min-h-[300px]">
+<img class="absolute inset-0 w-full h-full object-cover" data-alt="A bright, modern interior view of a luxury apartment living room in Greater Noida, rendered in a corporate modern light mode aesthetic. The room features high-end minimalist furniture, large floor-to-ceiling windows letting in natural sunlight, and subtle gold accent decor. The overall mood conveys success, high trust, and premium real estate quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8coYjEMSBUSGR3aXRJiKjHOl4Ux5Yb7KfwJ1ulZBczVygEvNWIncO0BFmwzn2-_atYOXngITgy-mSyAMtJYh4HFp6BNtur6IhzdFcZR9GLMaqF6pnA8s2rHj6QjhHNVceCUynLib2lZk7MwoudAbH7GtXYWKpzBigfa5BTH-tu63VVB_6j8IiyxXGUusK5AExTF7SciYsqSrefmnF3mzlrMTG0-D-UTph8ERf9wjfRvbwQ-16OVgqxtk9LGDpGdXowkG3pTqYYF_w"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8">
+<h3 class="text-white font-headline-md text-headline-md">Greater Noida Builder Success</h3>
+</div>
+</div>
+<div class="md:w-3/5 p-8 md:p-12">
+<div class="flex items-center gap-2 mb-6 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+<span class="font-label-md text-label-md uppercase tracking-wider">Case Study</span>
+</div>
+<h4 class="font-headline-lg-mobile text-headline-lg-mobile text-on-background mb-4">From Wasted Ads to Sold Units</h4>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8">
+                            A leading developer in Greater Noida was struggling with low conversion rates on weekend ad campaigns. Leads were cooling off by Monday morning. After deploying our AI Bot, every inquiry received an instant response, pre-qualifying intent before the sales team even arrived at the office.
+                        </p>
+<div class="grid grid-cols-2 gap-6 border-t border-outline-variant/30 pt-8">
+<div>
+<div class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-primary font-bold mb-1">55%</div>
+<div class="font-label-md text-label-md text-on-surface-variant">Reduction in CPL</div>
+</div>
+<div>
+<div class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-primary font-bold mb-1">3x</div>
+<div class="font-label-md text-label-md text-on-surface-variant">More Site Visits</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="py-section-gap relative overflow-hidden bg-surface-container-lowest">
+<div class="max-w-4xl mx-auto px-gutter text-center relative z-10">
+<h2 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-on-background mb-6">Stop letting hot leads turn cold.</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-2xl mx-auto">
+                    Join top real estate developers who are automating their pre-sales and maximizing their marketing ROI.
+                </p>
+<button class="bg-primary text-on-primary px-10 py-5 rounded-lg font-label-md text-label-md shadow-xl shadow-primary/30 hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300 text-lg">
+                    Set Up My Real Estate AI Bot
+                </button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest text-primary font-body-md text-body-md w-full py-12 border-t border-outline-variant/30 flat no shadows">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-container-max mx-auto px-gutter">
+<div>
+<div class="font-display-lg text-headline-md text-primary mb-4 font-bold">Agnostic AI</div>
+<p class="text-on-surface-variant text-sm">Empowering MSMEs through Intelligence.</p>
+</div>
+<div class="md:col-span-3 flex flex-wrap justify-end gap-x-8 gap-y-4">
+<a class="text-on-surface-variant hover:text-secondary transition-all opacity-100 hover:opacity-80" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-secondary transition-all opacity-100 hover:opacity-80" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-secondary transition-all opacity-100 hover:opacity-80" href="#">Cookie Policy</a>
+<a class="text-on-surface-variant hover:text-secondary transition-all opacity-100 hover:opacity-80" href="#">SLA</a>
+<a class="text-on-surface-variant hover:text-secondary transition-all opacity-100 hover:opacity-80" href="#">Contact Support</a>
+</div>
+<div class="md:col-span-4 mt-8 pt-8 border-t border-outline-variant/20 text-on-surface-variant text-sm text-center md:text-left">
+                © 2024 Agnostic AI Automation. Empowering MSMEs through Intelligence.
+            </div>
+</div>
+</footer>
+<!-- WhatsAppWidget -->
+<a aria-label="Chat on WhatsApp" class="bg-secondary-container text-on-secondary-container font-label-md text-label-md fixed bottom-8 right-8 z-50 rounded-full p-4 border border-primary/50 shadow-2xl hover:scale-110 hover:rotate-3 transition-transform animate-bounce flex items-center justify-center w-16 h-16" href="#">
+<span class="material-symbols-outlined text-[32px]">chat</span>
+</a>
+<script>
+        // Simple scroll effect for TopAppBar
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('topAppBar');
+            if (window.scrollY > 10) {
+                header.classList.add('shadow-md');
+                header.classList.remove('shadow-2xl');
+            } else {
+                header.classList.remove('shadow-md');
+                header.classList.add('shadow-2xl');
+            }
+        });
+    </script>
+</body></html>
