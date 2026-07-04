@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Viraal Project
 
-## Getting Started
+This is a monorepo containing the Viraal application, which consists of a Django REST API backend and a Next.js 16 frontend.
 
-First, run the development server:
+## Structure
 
+*   `frontend/`: Next.js 16 (App Router), React 19, Tailwind CSS v4, TypeScript.
+*   `backend/`: Django REST Framework (Python).
+*   `docs/`: Project documentation, PRDs, and business plans.
+
+## Setup
+
+### Frontend
 ```bash
+cd frontend
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Backend
+*(Django project to be initialized)*
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# AI Agent Instructions
 
-## Learn More
+> **Note to AI Agents (Gemini, Claude, Copilot, etc.):**
+> Read the following rules before modifying this repository.
 
-To learn more about Next.js, take a look at the following resources:
+### Frontend Rules (Next.js)
+*   **This is NOT the Next.js you know.** This version (16) has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
+*   Always use `frontend/` as the working directory for frontend commands.
+*   Use standard App Router conventions.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### General Rules
+*   Do not leave secrets in plaintext. Use environment variables.
+*   When executing shell commands, verify your current working directory (`frontend/` vs `backend/`).
