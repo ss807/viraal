@@ -294,7 +294,7 @@ export default function HomePage() {
           <div className="overflow-x-auto rounded-2xl border border-border shadow-sm">
             <table className="w-full text-left border-collapse min-w-[600px]">
               <thead>
-                <tr className="bg-primary border-b border-border">
+                <tr className="bg-gray-50 border-b border-border">
                   <th className="p-4 font-heading font-bold text-charcoal text-lg w-1/4">Feature</th>
                   <th className="p-4 font-heading font-bold text-slate w-1/4 text-center">In-House Hire</th>
                   <th className="p-4 font-heading font-bold text-slate w-1/4 text-center">Traditional Agency</th>
@@ -471,7 +471,7 @@ export default function HomePage() {
         </div>
         <div className="flex overflow-x-auto snap-x no-scrollbar pb-4 pl-4 md:pl-8 xl:pl-[calc((100vw-80rem)/2)] gap-4 w-full">
           {industries.map((item, i) => (
-            <div key={i} className="snap-start flex-shrink-0 w-32 md:w-40 flex flex-col items-center justify-center p-6 bg-primary border border-border rounded-2xl hover:border-gold hover:shadow-md transition-all cursor-pointer group">
+            <div key={i} className="snap-start flex-shrink-0 w-32 md:w-40 flex flex-col items-center justify-center p-6 bg-white border border-border rounded-2xl hover:border-gold hover:shadow-md transition-all cursor-pointer group">
               <iconify-icon icon={item.i} class="text-3xl text-slate group-hover:text-gold transition-colors mb-3"></iconify-icon>
               <span className="text-xs font-bold text-charcoal text-center">{item.n}</span>
             </div>
@@ -587,7 +587,7 @@ export default function HomePage() {
       </section>
 
       {/* 10. TESTIMONIALS */}
-      <section className="py-20 bg-primary">
+      <section className="py-20 bg-slate-50 border-t border-border">
         <div className="max-w-7xl mx-auto px-4 mb-12 text-center">
           <h2 className="font-heading font-bold text-3xl md:text-4xl text-charcoal tracking-tight">Real Founders. Real Growth.</h2>
         </div>
