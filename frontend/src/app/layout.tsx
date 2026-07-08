@@ -61,7 +61,7 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         />
-        <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js" defer></script>
+        <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
       </head>
       <body className="min-h-full flex flex-col bg-background text-on-background selection:bg-primary selection:text-on-primary font-sans">
         <LiveProofTicker />
