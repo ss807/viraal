@@ -69,10 +69,32 @@
   --font-size-body-sm--line-height: 1.5;
   --font-size-body-sm--font-weight: 400;
 
-  --font-size-label-md: 12px;
-  --font-size-label-md--line-height: 1;
   --font-size-label-md--letter-spacing: 0.05em;
   --font-size-label-md--font-weight: 600;
+
+  /* Viraal Light Theme specific colors from home.html */
+  --color-gold: #f59e0b;
+  --color-navy: #1e3a8a;
+  --color-charcoal: #0f172a;
+  --color-slate: #64748b;
+  --color-border: #e2e8f0;
+
+  --animate-marquee: marquee 25s linear infinite;
+  --animate-wave: wave 15s ease-in-out infinite alternate;
+  --animate-float: float 6s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+@keyframes wave {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 @layer utilities {

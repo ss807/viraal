@@ -1,40 +1,34 @@
-"use client";
-
 import React from "react";
 
 export function LiveProofTicker() {
   return (
-    <>
-      <style jsx>{`
-        .ticker-wrap {
-          overflow: hidden;
-          white-space: nowrap;
-          box-sizing: border-box;
-        }
-        .ticker {
-          display: inline-block;
-          animation: ticker 35s linear infinite;
-        }
-        @keyframes ticker {
-          0% { transform: translate3d(0, 0, 0); }
-          100% { transform: translate3d(-50%, 0, 0); }
-        }
-      `}</style>
-      <div className="bg-primary text-on-primary py-2 w-full z-50 fixed top-0 left-0 ticker-wrap font-sans text-xs md:text-sm font-semibold shadow-xs">
-        <div className="ticker">
-          <span className="mx-6">🔥 5 new leads generated for TechCorp in the last hour.</span>
-          <span className="mx-6">✅ Sarah's Boutique increased conversions by 22% this week.</span>
-          <span className="mx-6">📈 $10k+ revenue recovered by our AI agents yesterday.</span>
-          <span className="mx-6">🚀 Next-Gen AI audit completed for global manufacturing firm.</span>
-          <span className="mx-6">💡 New Feature: Hinglish Voice Support Active across India.</span>
-          {/* Duplicate for seamless infinite loop */}
-          <span className="mx-6">🔥 5 new leads generated for TechCorp in the last hour.</span>
-          <span className="mx-6">✅ Sarah's Boutique increased conversions by 22% this week.</span>
-          <span className="mx-6">📈 $10k+ revenue recovered by our AI agents yesterday.</span>
-          <span className="mx-6">🚀 Next-Gen AI audit completed for global manufacturing firm.</span>
-          <span className="mx-6">💡 New Feature: Hinglish Voice Support Active across India.</span>
-        </div>
+    <div className="fixed top-0 left-0 w-full h-8 bg-[#FFC107] text-charcoal font-medium text-xs md:text-sm flex items-center overflow-hidden z-50">
+      <div className="flex whitespace-nowrap animate-marquee">
+        <span className="mx-8 flex items-center gap-2">
+          <iconify-icon icon="solar:bolt-linear" class="text-lg"></iconify-icon>
+          2,847 Leads Generated for our clients this month via AI
+        </span>
+        <span className="mx-8 flex items-center gap-2">
+          <iconify-icon icon="solar:fire-linear" class="text-lg"></iconify-icon>
+          New: AI Voice Agents now available in Telugu & Tamil
+        </span>
+        <span className="mx-8 flex items-center gap-2">
+          <iconify-icon icon="solar:check-circle-linear" class="text-lg"></iconify-icon>
+          94% Client Retention Rate — We deliver real results
+        </span>
+        <span className="mx-8 flex items-center gap-2">
+          <iconify-icon icon="solar:bolt-linear" class="text-lg"></iconify-icon>
+          2,847 Leads Generated for our clients this month via AI
+        </span>
+        <span className="mx-8 flex items-center gap-2">
+          <iconify-icon icon="solar:fire-linear" class="text-lg"></iconify-icon>
+          New: AI Voice Agents now available in Telugu & Tamil
+        </span>
+        <span className="mx-8 flex items-center gap-2">
+          <iconify-icon icon="solar:check-circle-linear" class="text-lg"></iconify-icon>
+          94% Client Retention Rate — We deliver real results
+        </span>
       </div>
-    </>
+    </div>
   );
 }
