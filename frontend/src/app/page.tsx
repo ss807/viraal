@@ -2,20 +2,32 @@
 
 import React, { useState, useEffect, useRef } from "react";
 
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'iconify-icon': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
+        icon?: string;
+        class?: string;
+      };
+    }
+  }
+}
+
+
 const services = [
-  { title: "Lead Generation Automation", price: 7999, icon: "solar:magnet-linear", desc: "Never run out of prospects.", bullets: ["AI Lead Scraping", "LinkedIn Outreach", "Email Automation", "WhatsApp Nurturing", "CRM Integration"], isProject: false },
-  { title: "AI Chatbots & Support", price: 6999, icon: "solar:dialog-2-linear", desc: "24/7 customer engagement.", bullets: ["Website AI Chatbot", "WhatsApp AI Assistant", "IG/FB DM Automation", "FAQ Bots", "Handover to Human"], isProject: false },
-  { title: "Social Media Automation", price: 6499, icon: "solar:hashtag-linear", desc: "Consistent presence on autopilot.", bullets: ["AI Content Creation", "Reels & Shorts Generation", "Auto Scheduling", "Comment Management", "Trend Analysis"], isProject: false },
-  { title: "Sales Automation", price: 7999, icon: "solar:graph-up-linear", desc: "Close more deals, faster.", bullets: ["Follow-up Sequences", "Lead Scoring", "Proposal Generation", "Pipeline Management", "Meeting Scheduling"], isProject: false },
-  { title: "AI Content Production", price: 4999, icon: "solar:pen-linear", desc: "High-quality content at scale.", bullets: ["SEO Blog Writing", "Ad Copy Generation", "Product Descriptions", "Email Campaigns", "Video Scripts"], isProject: false },
-  { title: "AI Video Services", price: 8999, icon: "solar:videocamera-record-linear", desc: "Professional videos without actors.", bullets: ["AI Spokesperson Videos", "Product Promos", "UGC Content", "Real Estate Walkthroughs", "Multi-lingual dubbing"], isProject: true },
-  { title: "Process Automation", price: 6999, icon: "solar:settings-linear", desc: "Streamline internal operations.", bullets: ["Employee Onboarding", "HR Automation", "Invoice Generation", "Reporting Dashboards", "Data Entry Bots"], isProject: false },
-  { title: "E-Commerce Automation", price: 6499, icon: "solar:cart-large-linear", desc: "Boost store sales silently.", bullets: ["Product Listing AI", "Review Management", "Cart Recovery SMS", "Retention Campaigns", "Inventory Alerts"], isProject: false }
+  { title: "Lead Generation Automation", price: "7,999", icon: "solar:magnet-linear", desc: "Never run out of prospects.", bullets: ["AI Lead Scraping", "LinkedIn Outreach", "Email Automation", "WhatsApp Nurturing", "CRM Integration"] },
+  { title: "AI Chatbots & Support", price: "6,999", icon: "solar:dialog-2-linear", desc: "24/7 customer engagement.", bullets: ["Website AI Chatbot", "WhatsApp AI Assistant", "IG/FB DM Automation", "FAQ Bots", "Handover to Human"] },
+  { title: "Social Media Automation", price: "6,499", icon: "solar:hashtag-linear", desc: "Consistent presence on autopilot.", bullets: ["AI Content Creation", "Reels & Shorts Generation", "Auto Scheduling", "Comment Management", "Trend Analysis"] },
+  { title: "Sales Automation", price: "7,999", icon: "solar:graph-up-linear", desc: "Close more deals, faster.", bullets: ["Follow-up Sequences", "Lead Scoring", "Proposal Generation", "Pipeline Management", "Meeting Scheduling"] },
+  { title: "AI Content Production", price: "4,999", icon: "solar:pen-linear", desc: "High-quality content at scale.", bullets: ["SEO Blog Writing", "Ad Copy Generation", "Product Descriptions", "Email Campaigns", "Video Scripts"] },
+  { title: "AI Video Services", price: "8,999/project", icon: "solar:videocamera-record-linear", desc: "Professional videos without actors.", bullets: ["AI Spokesperson Videos", "Product Promos", "UGC Content", "Real Estate Walkthroughs", "Multi-lingual dubbing"] },
+  { title: "Process Automation", price: "6,999", icon: "solar:settings-linear", desc: "Streamline internal operations.", bullets: ["Employee Onboarding", "HR Automation", "Invoice Generation", "Reporting Dashboards", "Data Entry Bots"] },
+  { title: "E-Commerce Automation", price: "6,499", icon: "solar:cart-large-linear", desc: "Boost store sales silently.", bullets: ["Product Listing AI", "Review Management", "Cart Recovery SMS", "Retention Campaigns", "Inventory Alerts"] }
 ];
 
 const faqsData = [
   { q: "Kya yeh mere jaisi chhoti dukaan ke liye kaam karega?", a: "Absolutely! Our solutions are specifically designed for MSMEs. Whether you have 1 employee or 50, our AI scales to your needs seamlessly." },
-  { q: "Pehle ek agency se kaam karaya tha, kuch nahi hua", a: "We hear this often. Unlike traditional agencies that rely on manual work, our AI systems guarantee consistency and trackable ROI every single day." },
+  { q: "Pehle ek agency se kaam karaya tha, kuch kuch nahi hua", a: "We hear this often. Unlike traditional agencies that rely on manual work, our AI systems guarantee consistency and trackable ROI every single day." },
   { q: "Kitna kharcha aayega total?", a: "Our packages start at just ₹4,999/month. No hidden fees. You can use the calculator above to build a package that fits your exact budget." },
   { q: "Kya mujhe kuch sikhna padega?", a: "Not at all. We handle the technical setup entirely. You just need to know how to open WhatsApp or your email to receive the leads." }
 ];
@@ -51,22 +63,6 @@ export default function HomePage() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   const [selectedBuilder, setSelectedBuilder] = useState<Set<string>>(new Set());
   const [revenueSlider, setRevenueSlider] = useState(10);
-  
-  // Demos
-  const [phoneInput, setPhoneInput] = useState("");
-  const [callStatus, setCallStatus] = useState<"idle" | "calling" | "success">("idle");
-  const [chatInput, setChatInput] = useState("");
-  const [chatMessages, setChatMessages] = useState([
-    { sender: "bot", text: "Pricing kya hai aapki service ki?" },
-    { sender: "bot", text: "Hamari services ₹4,999/month se start hoti hain. Kya main aapke business type ke hisaab se ek custom package batau? 😊" }
-  ]);
-
-  const handleTriggerCall = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!phoneInput) return;
-    setCallStatus("calling");
-    setTimeout(() => setCallStatus("success"), 2000);
-  };
 
   const toggleBuilderItem = (id: string) => {
     const newSet = new Set(selectedBuilder);
@@ -85,59 +81,45 @@ export default function HomePage() {
 
   return (
     <>
-      {/* 3. HERO SECTION (From generated-page-2.html) */}
-      <header className="relative min-h-[90vh] flex flex-col justify-center items-center text-center overflow-hidden bg-gradient-to-br from-white via-primary to-white animate-wave py-20 px-4 border-b border-border">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')] opacity-50"></div>
+      {/* 3. HERO SECTION (From home.html EXACTLY) */}
+      <header className="relative min-h-[90vh] flex flex-col justify-center items-center text-center overflow-hidden hero-bg animate-wave py-20 px-4">
+        {/* Decorative particles */}
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9InJnYmEoMTUsMjMsNDIsMC4wNSkiLz48L3N2Zz4=')] opacity-50"></div>
+
         <div className="relative z-10 max-w-4xl mx-auto space-y-6 md:space-y-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-blue-800 text-xs font-semibold uppercase tracking-wider mb-2">
-            <span className="w-2 h-2 rounded-full bg-success animate-pulse"></span>
-            For Indian MSMEs
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-navy text-xs font-semibold uppercase tracking-wider mb-2 shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-success animate-pulse"></span> For Indian MSMEs
           </div>
+
           <h1 className="font-heading font-extrabold text-5xl md:text-6xl lg:text-7xl text-charcoal tracking-tight leading-tight">
-            AI-Powered Digital Marketing.
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-navy to-success">
-              Real Results.
-            </span>
+            AI-Powered Growth. <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-navy to-gold">Real Results.</span>
           </h1>
+
           <p className="font-sans font-medium text-lg md:text-xl text-slate max-w-2xl mx-auto leading-relaxed">
-            Complete AI Digital Marketing & Automation tailored for small and medium businesses. Starting at just <span className="text-charcoal font-bold">₹4,999/month</span>.
+            Complete AI Automation Solutions tailored for small and medium businesses. Starting at just <span className="text-navy font-bold">₹4,999/month</span>.
           </p>
+
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <a href="#builder" className="w-full sm:w-auto flex items-center justify-center gap-2 bg-gold text-charcoal font-bold uppercase text-sm px-8 min-h-[3rem] rounded-lg hover:brightness-110 active:scale-97 transition-all shadow-[0_0_20px_rgba(245,158,11,0.3)]">
-              Build Your AI Package
-              <iconify-icon icon="solar:arrow-right-linear" class="text-lg"></iconify-icon>
+              Build Your AI Package <iconify-icon icon="solar:arrow-right-linear" class="text-lg"></iconify-icon>
             </a>
-            <a href="#" className="w-full sm:w-auto flex items-center justify-center gap-2 bg-transparent text-charcoal border-2 border-border font-bold uppercase text-sm px-8 min-h-[3rem] rounded-lg hover:border-navy hover:text-navy active:scale-97 transition-all">
-              <iconify-icon icon="solar:chat-round-dots-linear" class="text-lg"></iconify-icon>
-              Chat with our AI Now
+            <a href="#" className="w-full sm:w-auto flex items-center justify-center gap-2 bg-white text-charcoal border border-border font-bold uppercase text-sm px-8 min-h-[3rem] rounded-lg hover:border-navy hover:text-navy active:scale-97 transition-all shadow-sm">
+              <iconify-icon icon="solar:chat-round-dots-linear" class="text-lg"></iconify-icon> Chat with our AI Now
             </a>
-          </div>
-          <div className="mt-8 pt-6 border-t border-border text-center">
-            <div className="inline-flex flex-col items-center gap-2">
-              <div className="flex items-center gap-2 text-navy">
-                <iconify-icon icon="solar:shield-check-bold" class="text-2xl"></iconify-icon>
-                <span className="font-bold tracking-wide uppercase text-sm">Zero Risk Guarantee</span>
-              </div>
-              <p className="text-slate text-sm max-w-md">
-                No advance money. We only accept payment if you are completely satisfied with our first fulfillment. Pay only after we deliver what we promised.
-              </p>
-            </div>
           </div>
         </div>
-        
+
+        {/* Video Placeholder */}
         <div className="relative z-10 w-full max-w-4xl mx-auto mt-16 px-4">
-          <div className="aspect-video w-full rounded-2xl border border-border bg-white/60 backdrop-blur-sm flex flex-col items-center justify-center shadow-lg relative overflow-hidden group cursor-pointer">
-            <div className="absolute inset-0 bg-gradient-to-t from-white to-transparent opacity-60"></div>
-            <div className="w-16 h-16 rounded-full bg-gold/90 text-charcoal flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-[0_0_30px_rgba(245,158,11,0.4)] relative z-10">
+          <div className="aspect-video w-full rounded-2xl border border-white/50 bg-white/60 backdrop-blur-xl flex flex-col items-center justify-center shadow-[0_20px_50px_rgba(15,23,42,0.1)] relative overflow-hidden group cursor-pointer transition-transform hover:-translate-y-2">
+            <div className="absolute inset-0 bg-gradient-to-t from-gray-100 to-transparent opacity-60"></div>
+            <div className="w-16 h-16 rounded-full bg-gold text-charcoal flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-[0_0_30px_rgba(245,158,11,0.4)] relative z-10">
               <iconify-icon icon="solar:play-bold" class="text-2xl ml-1"></iconify-icon>
             </div>
-            <span className="text-charcoal font-heading font-semibold tracking-tight relative z-10 text-lg md:text-xl">
+            <span className="text-charcoal font-heading font-extrabold tracking-tight relative z-10 text-lg md:text-xl">
               90-Second AI Video Sales Letter
             </span>
-            <span className="text-slate text-sm mt-2 relative z-10">
-              See how we transform businesses like yours
-            </span>
+            <span className="text-slate font-medium text-sm mt-2 relative z-10">See how we transform businesses like yours</span>
           </div>
         </div>
       </header>
@@ -167,6 +149,9 @@ export default function HomePage() {
           <div className="flex items-center gap-2 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all cursor-default text-lg font-heading font-bold text-gray-700">
             <iconify-icon icon="solar:infinity-linear" class="text-2xl text-blue-600"></iconify-icon> Meta Business Partner
           </div>
+          <div className="flex items-center gap-2 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all cursor-default text-lg font-heading font-bold text-gray-700">
+            <iconify-icon icon="solar:global-linear" class="text-2xl text-red-500"></iconify-icon> Google Partner
+          </div>
         </div>
       </section>
 
@@ -176,7 +161,9 @@ export default function HomePage() {
           <h2 className="font-heading font-bold text-3xl md:text-4xl text-charcoal tracking-tight mb-4">Don't believe us? <br /> Experience our AI right now.</h2>
           <p className="text-slate font-medium">Interact with our live demos below to see the quality of automation you can expect.</p>
         </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Card 1: Voice Call */}
           <div className="bg-surface border border-border rounded-2xl p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all flex flex-col justify-between">
             <div>
               <div className="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center mb-4">
@@ -186,24 +173,19 @@ export default function HomePage() {
               <p className="text-slate text-sm mb-6">Enter your number. Our AI Sales Agent will call you instantly and pitch our services in Hindi or English.</p>
             </div>
             <div>
-              {callStatus === "idle" ? (
-                <form className="flex flex-col gap-3" onSubmit={handleTriggerCall}>
-                  <div className="relative">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate text-sm">+91</span>
-                    <input type="tel" placeholder="10-digit number" value={phoneInput} onChange={e => setPhoneInput(e.target.value)} className="w-full bg-primary border border-border rounded-lg pl-10 pr-3 py-3 text-charcoal focus:border-gold outline-none" required />
-                  </div>
-                  <button type="submit" className="w-full bg-gold text-charcoal font-bold uppercase text-xs min-h-[3rem] rounded-lg hover:brightness-110 active:scale-97 transition-all flex items-center justify-center gap-2">
-                    Call Me in 30 Seconds <iconify-icon icon="solar:outgoing-call-linear" class="text-lg"></iconify-icon>
-                  </button>
-                </form>
-              ) : callStatus === "calling" ? (
-                <div className="py-4 text-center">Calling...</div>
-              ) : (
-                <div className="py-4 text-center text-success font-bold">Call Dispatched!</div>
-              )}
+              <div className="flex flex-col gap-3">
+                <div className="relative">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate text-sm">+91</span>
+                  <input type="tel" placeholder="10-digit number" className="input-field pl-10" />
+                </div>
+                <button className="w-full bg-gold text-charcoal font-bold uppercase text-xs min-h-[3rem] rounded-lg hover:brightness-110 active:scale-97 transition-all flex items-center justify-center gap-2">
+                  Call Me in 30 Seconds <iconify-icon icon="solar:outgoing-call-linear" class="text-lg"></iconify-icon>
+                </button>
+              </div>
             </div>
           </div>
 
+          {/* Card 2: Chatbot */}
           <div className="bg-surface border border-border rounded-2xl p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all flex flex-col justify-between relative overflow-hidden">
             <div className="absolute top-0 right-0 w-24 h-24 bg-success/10 rounded-bl-full -z-10"></div>
             <div>
@@ -213,7 +195,9 @@ export default function HomePage() {
               <h3 className="font-heading font-bold text-xl mb-4">AI Chatbot Demo</h3>
               <div className="bg-gray-50 border border-border rounded-xl p-3 mb-6 space-y-3 font-sans text-sm">
                 <div className="flex justify-end">
-                  <div className="bg-[#E7FFDB] text-charcoal px-3 py-2 rounded-l-lg rounded-tr-lg shadow-sm max-w-[85%] text-xs">Pricing kya hai aapki service ki?</div>
+                  <div className="bg-[#E7FFDB] text-charcoal px-3 py-2 rounded-l-lg rounded-tr-lg shadow-sm max-w-[85%] text-xs">
+                    Pricing kya hai aapki service ki?
+                  </div>
                 </div>
                 <div className="flex justify-start items-end gap-1">
                   <div className="w-6 h-6 rounded-full bg-success text-white flex items-center justify-center flex-shrink-0">
@@ -230,6 +214,7 @@ export default function HomePage() {
             </button>
           </div>
 
+          {/* Card 3: Audio Center */}
           <div className="bg-surface border border-border rounded-2xl p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all flex flex-col justify-between">
             <div>
               <div className="w-12 h-12 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center mb-4">
@@ -243,12 +228,12 @@ export default function HomePage() {
               </div>
               <div className="bg-charcoal text-white rounded-xl p-4 flex flex-col items-center justify-center h-28 relative overflow-hidden group cursor-pointer">
                 <div className="flex items-center gap-1 h-8 mb-2">
-                  <div className="w-1 bg-gold h-3 rounded-full animate-float"></div>
-                  <div className="w-1 bg-gold h-6 rounded-full animate-float"></div>
-                  <div className="w-1 bg-gold h-8 rounded-full animate-float"></div>
-                  <div className="w-1 bg-gold h-4 rounded-full animate-float"></div>
-                  <div className="w-1 bg-gold h-7 rounded-full animate-float"></div>
-                  <div className="w-1 bg-gold h-2 rounded-full animate-float"></div>
+                  <div className="w-1 bg-gold h-3 rounded-full animate-[float_1s_ease-in-out_infinite]"></div>
+                  <div className="w-1 bg-gold h-6 rounded-full animate-[float_1.2s_ease-in-out_infinite]"></div>
+                  <div className="w-1 bg-gold h-8 rounded-full animate-[float_0.8s_ease-in-out_infinite]"></div>
+                  <div className="w-1 bg-gold h-4 rounded-full animate-[float_1.5s_ease-in-out_infinite]"></div>
+                  <div className="w-1 bg-gold h-7 rounded-full animate-[float_1.1s_ease-in-out_infinite]"></div>
+                  <div className="w-1 bg-gold h-2 rounded-full animate-[float_0.9s_ease-in-out_infinite]"></div>
                 </div>
                 <div className="flex w-full justify-between text-2xs text-gray-400 font-numbers">
                   <span>0:00</span>
@@ -269,16 +254,17 @@ export default function HomePage() {
             <h2 className="font-heading font-bold text-3xl md:text-4xl text-charcoal tracking-tight">Our AI Solutions</h2>
             <p className="text-slate font-medium mt-2">Modular blocks to build your growth engine.</p>
           </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-            {services.map((s, idx) => (
-              <div key={idx} className="glass-card border border-border rounded-2xl p-6 relative group overflow-hidden transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(245,158,11,0.15)] flex flex-col h-[320px]">
+            {services.map((s, i) => (
+              <div key={i} className="glass-card border border-border rounded-2xl p-6 relative group overflow-hidden transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(245,158,11,0.15)] flex flex-col h-[320px]">
                 <div className="absolute inset-0 bg-gradient-to-br from-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
                 <div className="flex justify-between items-start mb-4 relative z-10">
                   <div className="w-10 h-10 rounded-lg bg-gold/10 text-gold flex items-center justify-center border border-gold/20 group-hover:bg-gold group-hover:text-white transition-colors">
                     <iconify-icon icon={s.icon} class="text-2xl"></iconify-icon>
                   </div>
                   <div className="bg-gray-100 px-3 py-1 rounded-full text-xs font-bold text-charcoal border border-gray-200">
-                    ₹{s.price.toLocaleString('en-IN')}{s.isProject ? '' : '/mo'}
+                    ₹{s.price}{s.price.includes('project') ? '' : '/mo'}
                   </div>
                 </div>
                 <h3 className="font-heading font-bold text-lg mb-2 text-charcoal relative z-10 group-hover:text-gold transition-colors">{s.title}</h3>
@@ -286,10 +272,8 @@ export default function HomePage() {
                 
                 <div className="absolute bottom-6 left-6 right-6 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 delay-100 z-10">
                   <ul className="space-y-2">
-                    {s.bullets.map((b, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
-                        <iconify-icon icon="solar:check-circle-linear" class="text-success mt-0.5 shrink-0"></iconify-icon> {b}
-                      </li>
+                    {s.bullets.map((b, idx) => (
+                      <li key={idx} className="flex items-start gap-2 text-sm text-gray-600"><iconify-icon icon="solar:check-circle-linear" class="text-success mt-0.5 shrink-0"></iconify-icon> {b}</li>
                     ))}
                   </ul>
                 </div>
@@ -306,6 +290,7 @@ export default function HomePage() {
             <h2 className="font-heading font-bold text-3xl md:text-4xl text-charcoal tracking-tight mb-4">The Old Way vs. The Viraal Way</h2>
             <p className="text-slate font-medium">Why MSMEs are switching to AI automation over traditional methods.</p>
           </div>
+          
           <div className="overflow-x-auto rounded-2xl border border-border shadow-sm">
             <table className="w-full text-left border-collapse min-w-[600px]">
               <thead>
@@ -350,19 +335,20 @@ export default function HomePage() {
       {/* 7. INTERACTIVE PACKAGE BUILDER & ROI CALCULATOR */}
       <section id="pricing" className="py-20 px-4 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          
+
           {/* Builder */}
           <div className="bg-white border border-border rounded-2xl p-6 md:p-8 shadow-sm flex flex-col h-full" id="builder">
             <h2 className="font-heading font-bold text-2xl tracking-tight mb-6 flex items-center gap-2">
               <iconify-icon icon="solar:box-linear" class="text-gold text-3xl"></iconify-icon> Build Your AI Package
             </h2>
+
             <div className="space-y-4 flex-grow">
               {builderServicesList.map(s => (
                 <label key={s.id} className="flex items-center justify-between p-3 border border-border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors custom-checkbox group">
                   <div className="flex items-center gap-3">
                     <input 
                       type="checkbox" 
-                      className="builder-cb w-5 h-5 accent-gold border-border rounded outline-none"
+                      value={s.price}
                       checked={selectedBuilder.has(s.id)}
                       onChange={() => toggleBuilderItem(s.id)}
                     />
@@ -372,7 +358,7 @@ export default function HomePage() {
                 </label>
               ))}
             </div>
-            
+
             <div className="mt-8 pt-6 border-t border-border">
               <div className="flex justify-between items-end mb-4">
                 <span className="text-slate font-medium">Estimated Monthly Investment</span>
@@ -381,7 +367,7 @@ export default function HomePage() {
                   <span className="font-numbers font-bold text-3xl text-charcoal">₹{builderTotal.toLocaleString('en-IN')}</span><span className="text-slate">/mo</span>
                 </div>
               </div>
-              
+
               {builderTotal > 14999 && (
                 <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6 transition-all">
                   <div className="flex gap-3">
@@ -405,7 +391,7 @@ export default function HomePage() {
             <div className="absolute top-0 right-0 w-64 h-64 bg-gold/10 rounded-full blur-3xl -z-10 translate-x-1/2 -translate-y-1/2"></div>
             <h2 className="font-heading font-bold text-2xl tracking-tight mb-2">ROI Calculator</h2>
             <p className="text-gray-400 text-sm mb-8">See how much revenue you're leaving on the table.</p>
-            
+
             <div className="space-y-6 flex-grow">
               <div>
                 <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Industry</label>
@@ -426,9 +412,8 @@ export default function HomePage() {
                 <input 
                   type="range" 
                   min="1" max="50" step="1" 
-                  value={revenueSlider} 
+                  value={revenueSlider}
                   onChange={(e) => setRevenueSlider(parseInt(e.target.value))}
-                  className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-gold" 
                 />
                 <div className="flex justify-between text-2xs text-gray-500 mt-1 font-numbers">
                   <span>₹1L</span>
@@ -439,13 +424,17 @@ export default function HomePage() {
               <div>
                 <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-3">Biggest Bottleneck</label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <label className="flex items-center gap-3 bg-gray-800 p-3 rounded-lg border border-gray-700 hover:border-gray-500 transition-colors cursor-pointer">
-                    <input type="radio" name="bottleneck" defaultChecked className="accent-gold" />
+                  <label className="custom-radio flex items-center gap-3 bg-gray-800 p-3 rounded-lg border border-gray-700 hover:border-gray-500 transition-colors">
+                    <input type="radio" name="bottleneck" defaultChecked />
                     <span className="text-sm font-medium">Not enough leads</span>
                   </label>
-                  <label className="flex items-center gap-3 bg-gray-800 p-3 rounded-lg border border-gray-700 hover:border-gray-500 transition-colors cursor-pointer">
-                    <input type="radio" name="bottleneck" className="accent-gold" />
+                  <label className="custom-radio flex items-center gap-3 bg-gray-800 p-3 rounded-lg border border-gray-700 hover:border-gray-500 transition-colors">
+                    <input type="radio" name="bottleneck" />
                     <span className="text-sm font-medium">Leads get lost</span>
+                  </label>
+                  <label className="custom-radio flex items-center gap-3 bg-gray-800 p-3 rounded-lg border border-gray-700 hover:border-gray-500 transition-colors">
+                    <input type="radio" name="bottleneck" />
+                    <span className="text-sm font-medium">Manual work</span>
                   </label>
                 </div>
               </div>
@@ -481,13 +470,13 @@ export default function HomePage() {
           <h3 className="text-sm font-bold text-slate uppercase tracking-wider">Industries We Dominate</h3>
         </div>
         <div className="flex overflow-x-auto snap-x no-scrollbar pb-4 pl-4 md:pl-8 xl:pl-[calc((100vw-80rem)/2)] gap-4 w-full">
-          {industries.map((item, idx) => (
-            <div key={idx} className="snap-start flex-shrink-0 w-32 md:w-40 flex flex-col items-center justify-center p-6 bg-primary border border-border rounded-2xl hover:border-gold hover:shadow-md transition-all cursor-pointer group">
+          {industries.map((item, i) => (
+            <div key={i} className="snap-start flex-shrink-0 w-32 md:w-40 flex flex-col items-center justify-center p-6 bg-primary border border-border rounded-2xl hover:border-gold hover:shadow-md transition-all cursor-pointer group">
               <iconify-icon icon={item.i} class="text-3xl text-slate group-hover:text-gold transition-colors mb-3"></iconify-icon>
               <span className="text-xs font-bold text-charcoal text-center">{item.n}</span>
             </div>
           ))}
-          <div className="snap-start flex-shrink-0 w-4 md:w-8"></div>
+          <div className="snap-start flex-shrink-0 w-4 md:w-8"></div> {/* Spacer */}
         </div>
       </section>
 
@@ -531,39 +520,55 @@ export default function HomePage() {
             <h2 className="font-heading font-bold text-3xl md:text-4xl text-charcoal tracking-tight mb-4">Go Live in 7 Days.</h2>
             <p className="text-slate font-medium">No complex IT projects. No lengthy meetings. Just results.</p>
           </div>
+          
           <div className="relative">
+            {/* Vertical Line */}
             <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-1 bg-border -translate-x-1/2 rounded-full"></div>
+            
             <div className="space-y-12">
+              {/* Day 1 */}
               <div className="relative flex flex-col md:flex-row items-center justify-between group">
                 <div className="md:w-5/12 text-center md:text-right mb-4 md:mb-0">
                   <h3 className="font-heading font-bold text-xl text-charcoal">Discovery & Audit</h3>
                   <p className="text-slate text-sm mt-2">We analyze your business, identify bottlenecks, and map out the exact AI workflow tailored to your specific industry.</p>
                 </div>
-                <div className="w-12 h-12 bg-gold text-charcoal rounded-full flex items-center justify-center font-numbers font-bold text-lg z-10 border-4 border-white shadow-md relative">1</div>
+                <div className="w-12 h-12 bg-gold text-charcoal rounded-full flex items-center justify-center font-numbers font-bold text-lg z-10 border-4 border-white shadow-md relative">
+                  1
+                </div>
                 <div className="md:w-5/12 text-center md:text-left mt-4 md:mt-0">
                   <span className="inline-block px-3 py-1 bg-blue-50 text-navy rounded-full text-xs font-bold uppercase tracking-wide">Day 1</span>
                 </div>
               </div>
+              
+              {/* Day 3 */}
               <div className="relative flex flex-col md:flex-row-reverse items-center justify-between group">
                 <div className="md:w-5/12 text-center md:text-left mb-4 md:mb-0">
                   <h3 className="font-heading font-bold text-xl text-charcoal">Custom AI Training</h3>
                   <p className="text-slate text-sm mt-2">Our engineers build and train your AI agents on your pricing, FAQs, and brand tone. We ensure it speaks perfectly in Hindi/English.</p>
                 </div>
-                <div className="w-12 h-12 bg-charcoal text-white rounded-full flex items-center justify-center font-numbers font-bold text-lg z-10 border-4 border-white shadow-md relative group-hover:bg-navy transition-colors">3</div>
+                <div className="w-12 h-12 bg-charcoal text-white rounded-full flex items-center justify-center font-numbers font-bold text-lg z-10 border-4 border-white shadow-md relative group-hover:bg-navy transition-colors">
+                  3
+                </div>
                 <div className="md:w-5/12 text-center md:text-right mt-4 md:mt-0">
                   <span className="inline-block px-3 py-1 bg-gray-100 text-charcoal rounded-full text-xs font-bold uppercase tracking-wide">Day 3</span>
                 </div>
               </div>
+              
+              {/* Day 5 */}
               <div className="relative flex flex-col md:flex-row items-center justify-between group">
                 <div className="md:w-5/12 text-center md:text-right mb-4 md:mb-0">
                   <h3 className="font-heading font-bold text-xl text-charcoal">Integration & Testing</h3>
                   <p className="text-slate text-sm mt-2">We hook the AI into your WhatsApp Business API, CRM, and calendar. We run extensive test scenarios to ensure perfection.</p>
                 </div>
-                <div className="w-12 h-12 bg-charcoal text-white rounded-full flex items-center justify-center font-numbers font-bold text-lg z-10 border-4 border-white shadow-md relative group-hover:bg-navy transition-colors">5</div>
+                <div className="w-12 h-12 bg-charcoal text-white rounded-full flex items-center justify-center font-numbers font-bold text-lg z-10 border-4 border-white shadow-md relative group-hover:bg-navy transition-colors">
+                  5
+                </div>
                 <div className="md:w-5/12 text-center md:text-left mt-4 md:mt-0">
                   <span className="inline-block px-3 py-1 bg-gray-100 text-charcoal rounded-full text-xs font-bold uppercase tracking-wide">Day 5</span>
                 </div>
               </div>
+              
+              {/* Day 7 */}
               <div className="relative flex flex-col md:flex-row-reverse items-center justify-between group">
                 <div className="md:w-5/12 text-center md:text-left mb-4 md:mb-0">
                   <h3 className="font-heading font-bold text-xl text-success">Launch & Lead Flow</h3>
@@ -586,9 +591,16 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 mb-12 text-center">
           <h2 className="font-heading font-bold text-3xl md:text-4xl text-charcoal tracking-tight">Real Founders. Real Growth.</h2>
         </div>
+
         <div className="flex overflow-x-auto snap-x no-scrollbar pb-8 pl-4 md:pl-8 xl:pl-[calc((100vw-80rem)/2)] gap-6 w-full">
-          {testimonials.map((t, idx) => (
-            <div key={idx} className="snap-start flex-shrink-0 w-80 md:w-96 bg-white border border-border rounded-2xl p-6 shadow-sm flex flex-col">
+          {testimonials.map((t, i) => (
+            <div key={i} className="snap-start flex-shrink-0 w-80 md:w-96 bg-white border border-border rounded-2xl p-6 shadow-sm flex flex-col">
+              <div className="aspect-video bg-gray-900 rounded-xl mb-6 relative overflow-hidden flex items-center justify-center group cursor-pointer">
+                <div className="absolute inset-0 bg-cover bg-center opacity-50 grayscale group-hover:grayscale-0 transition-all duration-500" style={{ backgroundImage: "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiM2NDc0OEIiLz48L3N2Zz4=')" }}></div>
+                <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white group-hover:bg-gold group-hover:text-charcoal transition-all relative z-10">
+                  <iconify-icon icon="solar:play-bold" class="text-xl ml-1"></iconify-icon>
+                </div>
+              </div>
               <p className="font-sans font-medium text-charcoal italic mb-6 flex-grow">"{t.quote}"</p>
               <div className="flex items-center gap-3 mt-auto">
                 <div className="w-10 h-10 rounded-full bg-gray-200 flex-shrink-0 flex items-center justify-center text-gray-500 font-bold font-heading">{t.name.charAt(0)}</div>
@@ -610,18 +622,19 @@ export default function HomePage() {
             <h2 className="font-heading font-bold text-3xl text-charcoal tracking-tight">Got Questions?</h2>
             <p className="text-slate mt-2">Answers to common doubts.</p>
           </div>
+
           <div className="space-y-4">
             {faqsData.map((faq, i) => (
-              <div key={i} className={`border border-border rounded-xl bg-gray-50 overflow-hidden transition-all ${activeFaq === i ? 'shadow-md' : ''}`}>
+              <div key={i} className={`border border-border rounded-xl bg-gray-50 faq-item overflow-hidden ${activeFaq === i ? 'active shadow-md' : ''}`}>
                 <button className="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onClick={() => setActiveFaq(activeFaq === i ? null : i)}>
                   <span className="font-bold text-sm text-charcoal">{faq.q}</span>
-                  <iconify-icon icon="solar:alt-arrow-down-linear" class={`text-gold text-xl transition-transform ${activeFaq === i ? 'rotate-180' : ''}`}></iconify-icon>
+                  <iconify-icon icon="solar:alt-arrow-down-linear" class="text-gold text-xl faq-icon"></iconify-icon>
                 </button>
-                {activeFaq === i && (
-                  <div className="bg-white border-t border-border px-6 py-4 text-sm text-slate">
+                <div className={`faq-content bg-white border-t border-border ${activeFaq === i ? 'open' : ''}`}>
+                  <div className="px-6 py-4 text-sm text-slate">
                     {faq.a}
                   </div>
-                )}
+                </div>
               </div>
             ))}
           </div>
@@ -630,11 +643,14 @@ export default function HomePage() {
 
       {/* 12. FINAL CTA */}
       <section className="relative bg-gradient-to-r from-gold to-yellow-500 py-24 overflow-hidden">
+        {/* Abstract shapes */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-red-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3"></div>
+
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
           <h2 className="font-heading font-extrabold text-4xl md:text-5xl text-charcoal tracking-tight mb-6">Ready to automate your business growth?</h2>
           <p className="text-charcoal/80 font-medium text-lg md:text-xl mb-10 max-w-2xl mx-auto">Join 200+ Indian businesses already using AI to get more customers, save time, and increase profits.</p>
+
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button className="w-full sm:w-auto bg-charcoal text-white font-bold uppercase text-sm px-8 min-h-[3.5rem] rounded-lg hover:bg-gray-800 active:scale-97 transition-all flex items-center justify-center gap-2 shadow-xl">
               <iconify-icon icon="solar:chat-round-line-linear" class="text-xl"></iconify-icon> Start on WhatsApp
@@ -643,7 +659,7 @@ export default function HomePage() {
               <iconify-icon icon="solar:phone-calling-linear" class="text-xl"></iconify-icon> Get a Free AI Audit
             </button>
           </div>
-          <p className="mt-8 text-sm text-charcoal/70 font-semibold">Or call us directly: <a href="tel:+919876543210" className="underline hover:text-charcoal">+91-9876543210</a></p>
+          <p className="mt-8 text-sm text-charcoal/70 font-semibold">Or call us directly: <a href="tel:+919876543210" className="underline hover:text-charcoal">++91-9876543210</a></p>
         </div>
       </section>
     </>
