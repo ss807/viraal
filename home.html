@@ -1,0 +1,1271 @@
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viraal - AI-Powered Growth for Indian MSMEs</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Montserrat:wght@600;700;800&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap"
+        rel="stylesheet">
+
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                        numbers: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#F8FAFC',
+                        surface: '#FFFFFF',
+                        gold: '#F59E0B',
+                        navy: '#1E3A8A',
+                        charcoal: '#0F172A',
+                        slate: '#64748B',
+                        success: '#10B981',
+                        border: '#E2E8F0',
+                    },
+                    animation: {
+                        'marquee': 'marquee 25s linear infinite',
+                        'wave': 'wave 15s ease-in-out infinite alternate',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-100%)' },
+                        },
+                        wave: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '100%': { backgroundPosition: '100% 50%' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base & Resets */
+        body {
+            font-size: 1rem;
+        }
+
+        /* Typography adjustments to avoid px/em */
+        .text-2xs {
+            font-size: 0.65rem;
+            line-height: 1;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #F8FAFC;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94A3B8;
+        }
+
+        /* Hide scrollbar for carousels but allow scroll */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Hero Background */
+        .hero-bg {
+            background: radial-gradient(circle at top left, rgba(245, 158, 11, 0.05), transparent 40%),
+                        radial-gradient(circle at bottom right, rgba(30, 58, 138, 0.05), transparent 40%);
+            background-color: #F8FAFC;
+        }
+
+        /* Glassmorphism subtle overlay */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* Custom Checkbox */
+        .custom-checkbox input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid #CBD5E1;
+            border-radius: 4px;
+            outline: none;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+            background-color: white;
+            flex-shrink: 0;
+        }
+
+        .custom-checkbox input[type="checkbox"]:checked {
+            background-color: #F59E0B;
+            border-color: #F59E0B;
+        }
+
+        .custom-checkbox input[type="checkbox"]:checked::after {
+            content: '';
+            position: absolute;
+            left: 30%;
+            top: 15%;
+            width: 30%;
+            height: 50%;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        /* Custom Radio */
+        .custom-radio input[type="radio"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid #CBD5E1;
+            border-radius: 50%;
+            outline: none;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+            background-color: white;
+            flex-shrink: 0;
+        }
+
+        .custom-radio input[type="radio"]:checked {
+            border-color: #F59E0B;
+        }
+
+        .custom-radio input[type="radio"]:checked::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0.5rem;
+            height: 0.5rem;
+            background-color: #F59E0B;
+            border-radius: 50%;
+        }
+
+        /* Custom Range Slider */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 1.5rem;
+            width: 1.5rem;
+            border-radius: 50%;
+            background: #F59E0B;
+            cursor: pointer;
+            margin-top: -0.5rem;
+            box-shadow: 0 2px 6px rgba(245, 158, 11, 0.4);
+            border: 2px solid white;
+            transition: transform 0.1s;
+        }
+
+        input[type=range]::-webkit-slider-thumb:active {
+            transform: scale(0.9);
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 0.5rem;
+            cursor: pointer;
+            background: #E2E8F0;
+            border-radius: 1rem;
+        }
+
+        /* Interactive inputs */
+        .input-field {
+            width: 100%;
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            color: #0F172A;
+            transition: all 0.2s;
+            outline: none;
+        }
+
+        .input-field:focus {
+            border-color: #F59E0B;
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+        }
+
+        /* Accordion */
+        .faq-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.3s ease-out;
+        }
+
+        .faq-content.open {
+            grid-template-rows: 1fr;
+        }
+
+        .faq-content>div {
+            overflow: hidden;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+
+<body class="font-sans bg-primary text-charcoal antialiased pb-16 md:pb-0 pt-8">
+
+    <!-- 1. LIVE PROOF TICKER -->
+    <div
+        class="fixed top-0 left-0 w-full h-8 bg-[#FFC107] text-charcoal font-medium text-xs md:text-sm flex items-center overflow-hidden z-50">
+        <div class="flex whitespace-nowrap animate-marquee">
+            <span class="mx-8 flex items-center gap-2"><iconify-icon icon="solar:bolt-linear"
+                    class="text-lg"></iconify-icon> 2,847 Leads Generated for our clients this month via AI</span>
+            <span class="mx-8 flex items-center gap-2"><iconify-icon icon="solar:fire-linear"
+                    class="text-lg"></iconify-icon> New: AI Voice Agents now available in Telugu &amp; Tamil</span>
+            <span class="mx-8 flex items-center gap-2"><iconify-icon icon="solar:check-circle-linear"
+                    class="text-lg"></iconify-icon> 94% Client Retention Rate — We deliver real results</span>
+            <!-- Duplicate for seamless loop -->
+            <span class="mx-8 flex items-center gap-2"><iconify-icon icon="solar:bolt-linear"
+                    class="text-lg"></iconify-icon> 2,847 Leads Generated for our clients this month via AI</span>
+            <span class="mx-8 flex items-center gap-2"><iconify-icon icon="solar:fire-linear"
+                    class="text-lg"></iconify-icon> New: AI Voice Agents now available in Telugu &amp; Tamil</span>
+            <span class="mx-8 flex items-center gap-2"><iconify-icon icon="solar:check-circle-linear"
+                    class="text-lg"></iconify-icon> 94% Client Retention Rate — We deliver real results</span>
+        </div>
+    </div>
+
+    <!-- 2. NAVIGATION -->
+    <nav
+        class="sticky top-8 w-full z-40 bg-white/95 backdrop-blur-md border-b border-border transition-all duration-300 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer">
+                    <span
+                        class="font-heading font-extrabold text-2xl text-transparent bg-clip-text bg-gradient-to-r from-navy to-gold tracking-tighter uppercase">Viraal</span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <div
+                        class="relative group cursor-pointer text-sm text-slate hover:text-navy font-medium flex items-center gap-1">
+                        Solutions <iconify-icon icon="solar:alt-arrow-down-linear"></iconify-icon>
+                        <div
+                            class="absolute top-full left-0 mt-2 w-48 bg-surface rounded-xl shadow-lg border border-border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-2">
+                            <a href="#services"
+                                class="block px-4 py-2 text-sm text-charcoal hover:bg-primary hover:text-gold">Lead
+                                Generation</a>
+                            <a href="#services"
+                                class="block px-4 py-2 text-sm text-charcoal hover:bg-primary hover:text-gold">AI
+                                Chatbots</a>
+                            <a href="#services"
+                                class="block px-4 py-2 text-sm text-charcoal hover:bg-primary hover:text-gold">Sales
+                                Automation</a>
+                        </div>
+                    </div>
+                    <a href="#industries" class="text-sm text-slate hover:text-navy font-medium">Industries</a>
+                    <a href="#pricing" class="text-sm text-slate hover:text-navy font-medium">Pricing</a>
+                    <a href="#trust" class="text-sm text-slate hover:text-navy font-medium">Trust Center</a>
+
+                    <div class="flex items-center ml-4 gap-4 border-l border-gray-200 pl-4">
+                        <div class="flex items-center bg-gray-100 rounded-full p-1 cursor-pointer">
+                            <span class="bg-white shadow-sm text-charcoal text-xs font-bold px-2 py-1 rounded-full">EN</span>
+                            <span class="text-slate text-xs font-medium px-2 py-1">हिंदी</span>
+                        </div>
+                        <button
+                            class="bg-navy text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-navy/90 transition-colors shadow-sm">
+                            Free AI Audit
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-slate hover:text-charcoal focus:outline-none p-2">
+                        <iconify-icon icon="solar:hamburger-menu-linear" class="text-2xl"></iconify-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-border px-4 pt-2 pb-4 space-y-1">
+            <a href="#services"
+                class="block px-3 py-2 text-base font-medium text-slate hover:text-navy hover:bg-gray-50 rounded-md">Solutions</a>
+            <a href="#industries"
+                class="block px-3 py-2 text-base font-medium text-slate hover:text-navy hover:bg-gray-50 rounded-md">Industries</a>
+            <a href="#pricing"
+                class="block px-3 py-2 text-base font-medium text-slate hover:text-navy hover:bg-gray-50 rounded-md">Pricing</a>
+            <div class="mt-4 pt-4 border-t border-border flex justify-between items-center px-3">
+                <div class="flex items-center bg-gray-100 rounded-full p-1">
+                    <span class="bg-white shadow-sm text-charcoal text-xs font-bold px-2 py-1 rounded-full">EN</span>
+                    <span class="text-slate text-xs font-medium px-2 py-1">HI</span>
+                </div>
+                <button class="bg-gold text-charcoal text-sm font-bold px-4 py-2 rounded-lg">Audit</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 3. HERO SECTION -->
+    <header
+        class="relative min-h-[90vh] flex flex-col justify-center items-center text-center overflow-hidden hero-bg animate-wave py-20 px-4">
+        <!-- Decorative particles -->
+        <div
+            class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9InJnYmEoMTUsMjMsNDIsMC4wNSkiLz48L3N2Zz4=')] opacity-50">
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto space-y-6 md:space-y-8">
+            <div
+                class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-navy text-xs font-semibold uppercase tracking-wider mb-2 shadow-sm">
+                <span class="w-2 h-2 rounded-full bg-success animate-pulse"></span> For Indian MSMEs
+            </div>
+
+            <h1
+                class="font-heading font-extrabold text-5xl md:text-6xl lg:text-7xl text-charcoal tracking-tight leading-tight">
+                AI-Powered Growth. <br> <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-navy to-gold">Real Results.</span>
+            </h1>
+
+            <p class="font-sans font-medium text-lg md:text-xl text-slate max-w-2xl mx-auto leading-relaxed">
+                Complete AI Automation Solutions tailored for small and medium businesses. Starting at just <span
+                    class="text-navy font-bold">₹4,999/month</span>.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                <a href="#builder"
+                    class="w-full sm:w-auto flex items-center justify-center gap-2 bg-gold text-charcoal font-bold uppercase text-sm px-8 min-h-[3rem] rounded-lg hover:brightness-110 active:scale-97 transition-all shadow-[0_0_20px_rgba(245,158,11,0.3)]">
+                    Build Your AI Package <iconify-icon icon="solar:arrow-right-linear" class="text-lg"></iconify-icon>
+                </a>
+                <a href="#"
+                    class="w-full sm:w-auto flex items-center justify-center gap-2 bg-white text-charcoal border border-border font-bold uppercase text-sm px-8 min-h-[3rem] rounded-lg hover:border-navy hover:text-navy active:scale-97 transition-all shadow-sm">
+                    <iconify-icon icon="solar:chat-round-dots-linear" class="text-lg"></iconify-icon> Chat with our AI
+                    Now
+                </a>
+            </div>
+        </div>
+
+        <!-- Video Placeholder -->
+        <div class="relative z-10 w-full max-w-4xl mx-auto mt-16 px-4">
+            <div
+                class="aspect-video w-full rounded-2xl border border-white/50 bg-white/60 backdrop-blur-xl flex flex-col items-center justify-center shadow-[0_20px_50px_rgba(15,23,42,0.1)] relative overflow-hidden group cursor-pointer transition-transform hover:-translate-y-2">
+                <div class="absolute inset-0 bg-gradient-to-t from-gray-100 to-transparent opacity-60"></div>
+                <div
+                    class="w-16 h-16 rounded-full bg-gold text-charcoal flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-[0_0_30px_rgba(245,158,11,0.4)] relative z-10">
+                    <iconify-icon icon="solar:play-bold" class="text-2xl ml-1"></iconify-icon>
+                </div>
+                <span
+                    class="text-charcoal font-heading font-extrabold tracking-tight relative z-10 text-lg md:text-xl">90-Second
+                    AI Video Sales Letter</span>
+                <span class="text-slate font-medium text-sm mt-2 relative z-10">See how we transform businesses like yours</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 4. TRUST BAR -->
+    <section class="bg-white border-b border-border py-6 overflow-hidden flex flex-col items-center justify-center"
+        id="trust">
+        <p class="text-xs font-semibold text-slate uppercase tracking-widest mb-4 text-center">Trusted Integrations
+            &amp; Certifications</p>
+        <div class="flex space-x-12 animate-marquee w-max">
+            <!-- Badges -->
+            <div
+                class="flex items-center gap-2 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all cursor-default text-lg font-heading font-bold text-gray-700">
+                <iconify-icon icon="solar:infinity-linear" class="text-2xl text-blue-600"></iconify-icon> Meta Business
+                Partner
+            </div>
+            <div
+                class="flex items-center gap-2 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all cursor-default text-lg font-heading font-bold text-gray-700">
+                <iconify-icon icon="solar:global-linear" class="text-2xl text-red-500"></iconify-icon> Google Partner
+            </div>
+            <div
+                class="flex items-center gap-2 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all cursor-default text-lg font-heading font-bold text-gray-700">
+                <iconify-icon icon="solar:phone-calling-linear" class="text-2xl text-success"></iconify-icon> WhatsApp
+                API
+            </div>
+            <div
+                class="flex items-center gap-2 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all cursor-default text-lg font-heading font-bold text-gray-700">
+                <iconify-icon icon="solar:shield-check-linear" class="text-2xl text-indigo-600"></iconify-icon> GeM
+                Registered
+            </div>
+            <div
+                class="flex items-center gap-2 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all cursor-default text-lg font-heading font-bold text-gray-700">
+                <iconify-icon icon="solar:medal-star-linear" class="text-2xl text-orange-500"></iconify-icon> Udyam
+                Certified
+            </div>
+            <div
+                class="flex items-center gap-2 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all cursor-default text-lg font-heading font-bold text-gray-700">
+                <iconify-icon icon="solar:lock-keyhole-linear" class="text-2xl text-teal-600"></iconify-icon> ISO 27001
+            </div>
+            <!-- Duplicates -->
+            <div
+                class="flex items-center gap-2 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all cursor-default text-lg font-heading font-bold text-gray-700">
+                <iconify-icon icon="solar:infinity-linear" class="text-2xl text-blue-600"></iconify-icon> Meta Business
+                Partner
+            </div>
+            <div
+                class="flex items-center gap-2 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all cursor-default text-lg font-heading font-bold text-gray-700">
+                <iconify-icon icon="solar:global-linear" class="text-2xl text-red-500"></iconify-icon> Google Partner
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. LIVE DEMO SECTION -->
+    <section class="py-20 px-4 max-w-7xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <h2 class="font-heading font-bold text-3xl md:text-4xl text-charcoal tracking-tight mb-4">Don't believe us?
+                <br>Experience our AI right now.</h2>
+            <p class="text-slate font-medium">Interact with our live demos below to see the quality of automation you
+                can expect.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Card 1: Voice Call -->
+            <div
+                class="bg-surface border border-border rounded-2xl p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all flex flex-col justify-between">
+                <div>
+                    <div class="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center mb-4">
+                        <iconify-icon icon="solar:phone-calling-linear" class="text-2xl"></iconify-icon>
+                    </div>
+                    <h3 class="font-heading font-bold text-xl mb-2">AI Voice Call Demo</h3>
+                    <p class="text-slate text-sm mb-6">Enter your number. Our AI Sales Agent will call you instantly and
+                        pitch our services in Hindi or English.</p>
+                </div>
+                <div>
+                    <div class="flex flex-col gap-3">
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate text-sm">+91</span>
+                            <input type="tel" placeholder="10-digit number" class="input-field pl-10">
+                        </div>
+                        <button
+                            class="w-full bg-gold text-charcoal font-bold uppercase text-xs min-h-[3rem] rounded-lg hover:brightness-110 active:scale-97 transition-all flex items-center justify-center gap-2">
+                            Call Me in 30 Seconds <iconify-icon icon="solar:outgoing-call-linear"
+                                class="text-lg"></iconify-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Chatbot -->
+            <div
+                class="bg-surface border border-border rounded-2xl p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all flex flex-col justify-between relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-success/10 rounded-bl-full -z-10"></div>
+                <div>
+                    <div class="w-12 h-12 rounded-full bg-green-50 text-success flex items-center justify-center mb-4">
+                        <iconify-icon icon="solar:chat-line-linear" class="text-2xl"></iconify-icon>
+                    </div>
+                    <h3 class="font-heading font-bold text-xl mb-4">AI Chatbot Demo</h3>
+
+                    <!-- Chat Mockup -->
+                    <div class="bg-gray-50 border border-border rounded-xl p-3 mb-6 space-y-3 font-sans text-sm">
+                        <div class="flex justify-end">
+                            <div
+                                class="bg-[#E7FFDB] text-charcoal px-3 py-2 rounded-l-lg rounded-tr-lg shadow-sm max-w-[85%] text-xs">
+                                Pricing kya hai aapki service ki?
+                            </div>
+                        </div>
+                        <div class="flex justify-start items-end gap-1">
+                            <div
+                                class="w-6 h-6 rounded-full bg-success text-white flex items-center justify-center flex-shrink-0">
+                                <iconify-icon icon="solar:robot-linear" class="text-xs"></iconify-icon>
+                            </div>
+                            <div
+                                class="bg-white border border-border text-charcoal px-3 py-2 rounded-r-lg rounded-tl-lg shadow-sm max-w-[85%] text-xs">
+                                Hamari services ₹4,999/month se start hoti hain. Kya main aapke business type ke hisaab
+                                se ek custom package batau? 😊
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button
+                    class="w-full border-2 border-success text-success font-bold uppercase text-xs min-h-[3rem] rounded-lg hover:bg-success hover:text-white active:scale-97 transition-all flex items-center justify-center gap-2">
+                    Try it on WhatsApp <iconify-icon icon="solar:arrow-right-up-linear" class="text-lg"></iconify-icon>
+                </button>
+            </div>
+
+            <!-- Card 3: Audio Center -->
+            <div
+                class="bg-surface border border-border rounded-2xl p-6 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all flex flex-col justify-between">
+                <div>
+                    <div
+                        class="w-12 h-12 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center mb-4">
+                        <iconify-icon icon="solar:record-circle-linear" class="text-2xl"></iconify-icon>
+                    </div>
+                    <h3 class="font-heading font-bold text-xl mb-4">Audio Demo Center</h3>
+
+                    <!-- Tabs -->
+                    <div class="flex bg-gray-100 rounded-lg p-1 mb-4">
+                        <button
+                            class="flex-1 text-xs font-semibold py-1.5 bg-white shadow-sm rounded-md text-charcoal">Hindi</button>
+                        <button
+                            class="flex-1 text-xs font-semibold py-1.5 text-slate hover:text-charcoal">English</button>
+                        <button
+                            class="flex-1 text-xs font-semibold py-1.5 text-slate hover:text-charcoal">Hinglish</button>
+                    </div>
+
+                    <!-- Player -->
+                    <div
+                        class="bg-charcoal text-white rounded-xl p-4 flex flex-col items-center justify-center h-28 relative overflow-hidden group cursor-pointer">
+                        <!-- Waveform visualizer mock -->
+                        <div class="flex items-center gap-1 h-8 mb-2">
+                            <div class="w-1 bg-gold h-3 rounded-full animate-[float_1s_ease-in-out_infinite]"></div>
+                            <div class="w-1 bg-gold h-6 rounded-full animate-[float_1.2s_ease-in-out_infinite]"></div>
+                            <div class="w-1 bg-gold h-8 rounded-full animate-[float_0.8s_ease-in-out_infinite]"></div>
+                            <div class="w-1 bg-gold h-4 rounded-full animate-[float_1.5s_ease-in-out_infinite]"></div>
+                            <div class="w-1 bg-gold h-7 rounded-full animate-[float_1.1s_ease-in-out_infinite]"></div>
+                            <div class="w-1 bg-gold h-2 rounded-full animate-[float_0.9s_ease-in-out_infinite]"></div>
+                        </div>
+                        <div class="flex w-full justify-between text-2xs text-gray-400 font-numbers">
+                            <span>0:00</span>
+                            <iconify-icon icon="solar:play-circle-linear"
+                                class="text-xl text-white group-hover:text-gold transition-colors"></iconify-icon>
+                            <span>1:14</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-xs text-slate mt-4 text-center">Listen to real AI-generated sales calls.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. SERVICE GRID -->
+    <section id="services" class="py-20 bg-gray-50 border-y border-border">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="mb-12">
+                <h2 class="font-heading font-bold text-3xl md:text-4xl text-charcoal tracking-tight">Our AI Solutions
+                </h2>
+                <p class="text-slate font-medium mt-2">Modular blocks to build your growth engine.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                <!-- Service Cards (Generated 8 items based on prompt) -->
+                <script>
+                    const services = [
+                        { title: "Lead Generation Automation", price: "7,999", icon: "solar:magnet-linear", desc: "Never run out of prospects.", bullets: ["AI Lead Scraping", "LinkedIn Outreach", "Email Automation", "WhatsApp Nurturing", "CRM Integration"] },
+                        { title: "AI Chatbots & Support", price: "6,999", icon: "solar:dialog-2-linear", desc: "24/7 customer engagement.", bullets: ["Website AI Chatbot", "WhatsApp AI Assistant", "IG/FB DM Automation", "FAQ Bots", "Handover to Human"] },
+                        { title: "Social Media Automation", price: "6,499", icon: "solar:hashtag-linear", desc: "Consistent presence on autopilot.", bullets: ["AI Content Creation", "Reels & Shorts Generation", "Auto Scheduling", "Comment Management", "Trend Analysis"] },
+                        { title: "Sales Automation", price: "7,999", icon: "solar:graph-up-linear", desc: "Close more deals, faster.", bullets: ["Follow-up Sequences", "Lead Scoring", "Proposal Generation", "Pipeline Management", "Meeting Scheduling"] },
+                        { title: "AI Content Production", price: "4,999", icon: "solar:pen-linear", desc: "High-quality content at scale.", bullets: ["SEO Blog Writing", "Ad Copy Generation", "Product Descriptions", "Email Campaigns", "Video Scripts"] },
+                        { title: "AI Video Services", price: "8,999/project", icon: "solar:videocamera-record-linear", desc: "Professional videos without actors.", bullets: ["AI Spokesperson Videos", "Product Promos", "UGC Content", "Real Estate Walkthroughs", "Multi-lingual dubbing"] },
+                        { title: "Process Automation", price: "6,999", icon: "solar:settings-linear", desc: "Streamline internal operations.", bullets: ["Employee Onboarding", "HR Automation", "Invoice Generation", "Reporting Dashboards", "Data Entry Bots"] },
+                        { title: "E-Commerce Automation", price: "6,499", icon: "solar:cart-large-linear", desc: "Boost store sales silently.", bullets: ["Product Listing AI", "Review Management", "Cart Recovery SMS", "Retention Campaigns", "Inventory Alerts"] }
+                    ];
+
+                    services.forEach(s => {
+                        document.write(`
+                            <div class="glass-card border border-border rounded-2xl p-6 relative group overflow-hidden transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(245,158,11,0.15)] flex flex-col h-[320px]">
+                                <div class="absolute inset-0 bg-gradient-to-br from-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                                <div class="flex justify-between items-start mb-4 relative z-10">
+                                    <div class="w-10 h-10 rounded-lg bg-gold/10 text-gold flex items-center justify-center border border-gold/20 group-hover:bg-gold group-hover:text-white transition-colors">
+                                        <iconify-icon icon="${s.icon}" class="text-2xl"></iconify-icon>
+                                    </div>
+                                    <div class="bg-gray-100 px-3 py-1 rounded-full text-xs font-bold text-charcoal border border-gray-200">
+                                        ₹${s.price}${s.price.includes('project') ? '' : '/mo'}
+                                    </div>
+                                </div>
+                                <h3 class="font-heading font-bold text-lg mb-2 text-charcoal relative z-10 group-hover:text-gold transition-colors">${s.title}</h3>
+                                <p class="text-slate text-sm font-medium relative z-10 transition-all duration-300 group-hover:opacity-0 group-hover:h-0 overflow-hidden">${s.desc}</p>
+                                
+                                <!-- Hover Details -->
+                                <div class="absolute bottom-6 left-6 right-6 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 delay-100 z-10">
+                                    <ul class="space-y-2">
+                                        ${s.bullets.map(b => `<li class="flex items-start gap-2 text-sm text-gray-600"><iconify-icon icon="solar:check-circle-linear" class="text-success mt-0.5 shrink-0"></iconify-icon> ${b}</li>`).join('')}
+                                    </ul>
+                                </div>
+                            </div>
+                        `);
+                    });
+                </script>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPARISON TABLE SECTION -->
+    <section class="py-20 bg-white">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="font-heading font-bold text-3xl md:text-4xl text-charcoal tracking-tight mb-4">The Old Way vs. The Viraal Way</h2>
+                <p class="text-slate font-medium">Why MSMEs are switching to AI automation over traditional methods.</p>
+            </div>
+            
+            <div class="overflow-x-auto rounded-2xl border border-border shadow-sm">
+                <table class="w-full text-left border-collapse min-w-[600px]">
+                    <thead>
+                        <tr class="bg-primary border-b border-border">
+                            <th class="p-4 font-heading font-bold text-charcoal text-lg w-1/4">Feature</th>
+                            <th class="p-4 font-heading font-bold text-slate w-1/4 text-center">In-House Hire</th>
+                            <th class="p-4 font-heading font-bold text-slate w-1/4 text-center">Traditional Agency</th>
+                            <th class="p-4 font-heading font-bold text-navy w-1/4 text-center bg-blue-50/50">Viraal AI</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm">
+                        <tr class="border-b border-border">
+                            <td class="p-4 font-bold text-charcoal">Availability</td>
+                            <td class="p-4 text-center text-slate">9 AM to 6 PM (Mon-Sat)</td>
+                            <td class="p-4 text-center text-slate">Takes 2-3 days to respond</td>
+                            <td class="p-4 text-center font-bold text-success bg-blue-50/50 flex items-center justify-center gap-1"><iconify-icon icon="solar:check-circle-bold"></iconify-icon> 24/7/365 Instant Response</td>
+                        </tr>
+                        <tr class="border-b border-border bg-gray-50/50">
+                            <td class="p-4 font-bold text-charcoal">Average Monthly Cost</td>
+                            <td class="p-4 text-center text-slate">₹25,000 - ₹40,000</td>
+                            <td class="p-4 text-center text-slate">₹30,000+</td>
+                            <td class="p-4 text-center font-bold text-gold bg-blue-50/50 text-base">Starts at ₹4,999</td>
+                        </tr>
+                        <tr class="border-b border-border">
+                            <td class="p-4 font-bold text-charcoal">Lead Loss Rate</td>
+                            <td class="p-4 text-center text-slate">High (Missed calls, late replies)</td>
+                            <td class="p-4 text-center text-slate">Medium (Batch processing)</td>
+                            <td class="p-4 text-center font-bold text-success bg-blue-50/50 flex items-center justify-center gap-1"><iconify-icon icon="solar:check-circle-bold"></iconify-icon> 0% (Every lead captured)</td>
+                        </tr>
+                        <tr class="border-b border-border bg-gray-50/50">
+                            <td class="p-4 font-bold text-charcoal">Time to Setup</td>
+                            <td class="p-4 text-center text-slate">15-30 days (Hiring/Training)</td>
+                            <td class="p-4 text-center text-slate">10-14 days onboarding</td>
+                            <td class="p-4 text-center font-bold text-success bg-blue-50/50 flex items-center justify-center gap-1"><iconify-icon icon="solar:check-circle-bold"></iconify-icon> Live in 7 Days</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. INTERACTIVE PACKAGE BUILDER & ROI CALCULATOR -->
+    <section id="pricing" class="py-20 px-4 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+            <!-- Builder -->
+            <div class="bg-white border border-border rounded-2xl p-6 md:p-8 shadow-sm flex flex-col h-full"
+                id="builder">
+                <h2 class="font-heading font-bold text-2xl tracking-tight mb-6 flex items-center gap-2">
+                    <iconify-icon icon="solar:box-linear" class="text-gold text-3xl"></iconify-icon> Build Your AI
+                    Package
+                </h2>
+
+                <div class="space-y-4 flex-grow" id="checkbox-list">
+                    <!-- Checkboxes generated by JS below to keep HTML clean -->
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-border">
+                    <div class="flex justify-between items-end mb-4">
+                        <span class="text-slate font-medium">Estimated Monthly Investment</span>
+                        <div class="text-right">
+                            <span
+                                class="text-xs text-gray-400 block mb-1 uppercase tracking-wider font-bold">Total</span>
+                            <span class="font-numbers font-bold text-3xl text-charcoal"
+                                id="builder-total">₹0</span><span class="text-slate">/mo</span>
+                        </div>
+                    </div>
+
+                    <div id="bundle-recommendation"
+                        class="hidden bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6 transition-all">
+                        <div class="flex gap-3">
+                            <iconify-icon icon="solar:lightbulb-bolt-linear"
+                                class="text-blue-600 text-2xl shrink-0"></iconify-icon>
+                            <div>
+                                <h4 class="font-bold text-blue-900 text-sm">💡 RECOMMENDED: Starter AI Pack</h4>
+                                <p class="text-xs text-blue-800 mt-1">Get top 3 services for just <span
+                                        class="font-bold">₹14,999/mo</span>. <span class="text-success font-bold">Save
+                                        ₹<span id="save-amount">0</span>!</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button
+                        class="w-full bg-gold text-charcoal font-bold uppercase text-sm min-h-[3rem] rounded-lg hover:brightness-110 active:scale-97 transition-all flex items-center justify-center gap-2">
+                        Send This Proposal to My WhatsApp <iconify-icon icon="solar:plain-2-linear"
+                            class="text-lg"></iconify-icon>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ROI Calculator -->
+            <div
+                class="bg-charcoal text-white rounded-2xl p-6 md:p-8 shadow-lg relative overflow-hidden flex flex-col h-full">
+                <!-- Abstract BG -->
+                <div
+                    class="absolute top-0 right-0 w-64 h-64 bg-gold/10 rounded-full blur-3xl -z-10 translate-x-1/2 -translate-y-1/2">
+                </div>
+
+                <h2 class="font-heading font-bold text-2xl tracking-tight mb-2">ROI Calculator</h2>
+                <p class="text-gray-400 text-sm mb-8">See how much revenue you're leaving on the table.</p>
+
+                <div class="space-y-6 flex-grow">
+                    <div>
+                        <label
+                            class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Industry</label>
+                        <select
+                            class="w-full bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:border-gold outline-none text-sm appearance-none cursor-pointer">
+                            <option>Retail &amp; E-commerce</option>
+                            <option>Real Estate</option>
+                            <option>Healthcare &amp; Clinics</option>
+                            <option>Education &amp; Coaching</option>
+                            <option>Professional Services</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-end mb-2">
+                            <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider">Monthly
+                                Revenue</label>
+                            <span class="font-numbers font-bold text-gold" id="rev-val">₹10 Lakhs</span>
+                        </div>
+                        <input type="range" id="rev-slider" min="1" max="50" value="10" step="1">
+                        <div class="flex justify-between text-2xs text-gray-500 mt-1 font-numbers">
+                            <span>₹1L</span>
+                            <span>₹50L+</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-3">Biggest
+                            Bottleneck</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <label
+                                class="custom-radio flex items-center gap-3 bg-gray-800 p-3 rounded-lg border border-gray-700 hover:border-gray-500 transition-colors">
+                                <input type="radio" name="bottleneck" checked="">
+                                <span class="text-sm font-medium">Not enough leads</span>
+                            </label>
+                            <label
+                                class="custom-radio flex items-center gap-3 bg-gray-800 p-3 rounded-lg border border-gray-700 hover:border-gray-500 transition-colors">
+                                <input type="radio" name="bottleneck">
+                                <span class="text-sm font-medium">Leads get lost</span>
+                            </label>
+                            <label
+                                class="custom-radio flex items-center gap-3 bg-gray-800 p-3 rounded-lg border border-gray-700 hover:border-gray-500 transition-colors">
+                                <input type="radio" name="bottleneck">
+                                <span class="text-sm font-medium">Manual work</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="mt-8 bg-gray-900 rounded-xl p-4 border border-gray-700 flex flex-col sm:flex-row justify-around gap-4 text-center">
+                    <div>
+                        <span class="block text-2xs text-gray-400 uppercase tracking-wider mb-1">Estimated Leads
+                            Lost</span>
+                        <span class="font-numbers font-bold text-xl text-red-400" id="calc-leads">50/mo</span>
+                    </div>
+                    <div class="hidden sm:block w-px bg-gray-700"></div>
+                    <div>
+                        <span class="block text-2xs text-gray-400 uppercase tracking-wider mb-1">Potential
+                            Recovery</span>
+                        <span class="font-numbers font-bold text-xl text-success" id="calc-rev">₹1.5L/mo</span>
+                    </div>
+                    <div class="hidden sm:block w-px bg-gray-700"></div>
+                    <div>
+                        <span class="block text-2xs text-gray-400 uppercase tracking-wider mb-1">Hours Saved</span>
+                        <span class="font-numbers font-bold text-xl text-blue-400" id="calc-hours">60 hrs</span>
+                    </div>
+                </div>
+
+                <button
+                    class="w-full bg-white text-charcoal font-bold uppercase text-sm min-h-[3rem] rounded-lg hover:bg-gray-100 active:scale-97 transition-all mt-6">
+                    Get Free Custom Growth Plan
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. INDUSTRY CAROUSEL -->
+    <section id="industries" class="py-10 bg-white border-y border-border overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 mb-6">
+            <h3 class="text-sm font-bold text-slate uppercase tracking-wider">Industries We Dominate</h3>
+        </div>
+        <div
+            class="flex overflow-x-auto snap-x no-scrollbar pb-4 pl-4 md:pl-8 xl:pl-[calc((100vw-80rem)/2)] gap-4 w-full">
+            <script>
+                const ind = [
+                    { n: "Jewellery", i: "solar:crown-linear" },
+                    { n: "Real Estate", i: "solar:buildings-linear" },
+                    { n: "Hospitals", i: "solar:health-linear" },
+                    { n: "Gyms", i: "solar:dumbbell-large-linear" },
+                    { n: "Restaurants", i: "solar:cup-hot-linear" },
+                    { n: "Education", i: "solar:diploma-linear" },
+                    { n: "Car Dealers", i: "solar:bus-linear" },
+                    { n: "Fashion", i: "solar:tag-linear" },
+                    { n: "Manufacturing", i: "solar:factory-linear" }
+                ];
+                ind.forEach(item => {
+                    document.write(`
+                        <div class="snap-start flex-shrink-0 w-32 md:w-40 flex flex-col items-center justify-center p-6 bg-primary border border-border rounded-2xl hover:border-gold hover:shadow-md transition-all cursor-pointer group">
+                            <iconify-icon icon="${item.i}" class="text-3xl text-slate group-hover:text-gold transition-colors mb-3"></iconify-icon>
+                            <span class="text-xs font-bold text-charcoal text-center">${item.n}</span>
+                        </div>
+                    `);
+                });
+            </script>
+            <div class="snap-start flex-shrink-0 w-4 md:w-8"></div> <!-- Spacer -->
+        </div>
+    </section>
+
+    <!-- 9. RESULTS & NUMBERS -->
+    <section class="bg-navy py-24 text-white relative overflow-hidden" id="results-section">
+        <div
+            class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-800/50 via-navy to-navy">
+        </div>
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center">
+                <div>
+                    <div
+                        class="font-numbers font-bold text-4xl md:text-6xl text-gold mb-2 flex justify-center items-end">
+                        <span class="counter" data-target="2500">0</span><span class="text-3xl md:text-5xl">+</span>
+                    </div>
+                    <p class="text-gray-400 font-medium text-sm md:text-base">Leads Generated</p>
+                </div>
+                <div>
+                    <div
+                        class="font-numbers font-bold text-4xl md:text-6xl text-white mb-2 flex justify-center items-end">
+                        <span class="counter" data-target="40">0</span><span class="text-3xl md:text-5xl">%</span>
+                    </div>
+                    <p class="text-gray-400 font-medium text-sm md:text-base">Avg. Drop in CPL</p>
+                </div>
+                <div>
+                    <div
+                        class="font-numbers font-bold text-4xl md:text-6xl text-white mb-2 flex justify-center items-end">
+                        <span class="counter" data-target="7">0</span>
+                    </div>
+                    <p class="text-gray-400 font-medium text-sm md:text-base">Days to Go Live</p>
+                </div>
+                <div>
+                    <div
+                        class="font-numbers font-bold text-4xl md:text-6xl text-white mb-2 flex justify-center items-end">
+                        <span class="counter" data-target="12">0</span><span class="text-3xl md:text-5xl">+</span>
+                    </div>
+                    <p class="text-gray-400 font-medium text-sm md:text-base">Industries Served</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TIMELINE SECTION -->
+    <section class="py-20 bg-white border-b border-border">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="font-heading font-bold text-3xl md:text-4xl text-charcoal tracking-tight mb-4">Go Live in 7 Days.</h2>
+                <p class="text-slate font-medium">No complex IT projects. No lengthy meetings. Just results.</p>
+            </div>
+            
+            <div class="relative">
+                <!-- Vertical Line -->
+                <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-1 bg-border -translate-x-1/2 rounded-full"></div>
+                
+                <div class="space-y-12">
+                    <!-- Day 1 -->
+                    <div class="relative flex flex-col md:flex-row items-center justify-between group">
+                        <div class="md:w-5/12 text-center md:text-right mb-4 md:mb-0">
+                            <h3 class="font-heading font-bold text-xl text-charcoal">Discovery & Audit</h3>
+                            <p class="text-slate text-sm mt-2">We analyze your business, identify bottlenecks, and map out the exact AI workflow tailored to your specific industry.</p>
+                        </div>
+                        <div class="w-12 h-12 bg-gold text-charcoal rounded-full flex items-center justify-center font-numbers font-bold text-lg z-10 border-4 border-white shadow-md relative">
+                            1
+                        </div>
+                        <div class="md:w-5/12 text-center md:text-left mt-4 md:mt-0">
+                            <span class="inline-block px-3 py-1 bg-blue-50 text-navy rounded-full text-xs font-bold uppercase tracking-wide">Day 1</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Day 3 -->
+                    <div class="relative flex flex-col md:flex-row-reverse items-center justify-between group">
+                        <div class="md:w-5/12 text-center md:text-left mb-4 md:mb-0">
+                            <h3 class="font-heading font-bold text-xl text-charcoal">Custom AI Training</h3>
+                            <p class="text-slate text-sm mt-2">Our engineers build and train your AI agents on your pricing, FAQs, and brand tone. We ensure it speaks perfectly in Hindi/English.</p>
+                        </div>
+                        <div class="w-12 h-12 bg-charcoal text-white rounded-full flex items-center justify-center font-numbers font-bold text-lg z-10 border-4 border-white shadow-md relative group-hover:bg-navy transition-colors">
+                            3
+                        </div>
+                        <div class="md:w-5/12 text-center md:text-right mt-4 md:mt-0">
+                            <span class="inline-block px-3 py-1 bg-gray-100 text-charcoal rounded-full text-xs font-bold uppercase tracking-wide">Day 3</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Day 5 -->
+                    <div class="relative flex flex-col md:flex-row items-center justify-between group">
+                        <div class="md:w-5/12 text-center md:text-right mb-4 md:mb-0">
+                            <h3 class="font-heading font-bold text-xl text-charcoal">Integration & Testing</h3>
+                            <p class="text-slate text-sm mt-2">We hook the AI into your WhatsApp Business API, CRM, and calendar. We run extensive test scenarios to ensure perfection.</p>
+                        </div>
+                        <div class="w-12 h-12 bg-charcoal text-white rounded-full flex items-center justify-center font-numbers font-bold text-lg z-10 border-4 border-white shadow-md relative group-hover:bg-navy transition-colors">
+                            5
+                        </div>
+                        <div class="md:w-5/12 text-center md:text-left mt-4 md:mt-0">
+                            <span class="inline-block px-3 py-1 bg-gray-100 text-charcoal rounded-full text-xs font-bold uppercase tracking-wide">Day 5</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Day 7 -->
+                    <div class="relative flex flex-col md:flex-row-reverse items-center justify-between group">
+                        <div class="md:w-5/12 text-center md:text-left mb-4 md:mb-0">
+                            <h3 class="font-heading font-bold text-xl text-success">Launch & Lead Flow</h3>
+                            <p class="text-slate text-sm mt-2">Your automated growth engine is live. The AI starts handling inquiries 24/7, booking appointments, and recovering lost leads.</p>
+                        </div>
+                        <div class="w-16 h-16 bg-success text-white rounded-full flex items-center justify-center font-numbers font-bold text-2xl z-10 border-4 border-white shadow-lg relative group-hover:scale-110 transition-transform">
+                            <iconify-icon icon="solar:rocket-linear"></iconify-icon>
+                        </div>
+                        <div class="md:w-5/12 text-center md:text-right mt-4 md:mt-0">
+                            <span class="inline-block px-3 py-1 bg-green-50 text-success rounded-full text-xs font-bold uppercase tracking-wide">Day 7</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. TESTIMONIALS -->
+    <section class="py-20 bg-primary">
+        <div class="max-w-7xl mx-auto px-4 mb-12 text-center">
+            <h2 class="font-heading font-bold text-3xl md:text-4xl text-charcoal tracking-tight">Real Founders. Real
+                Growth.</h2>
+        </div>
+
+        <div
+            class="flex overflow-x-auto snap-x no-scrollbar pb-8 pl-4 md:pl-8 xl:pl-[calc((100vw-80rem)/2)] gap-6 w-full">
+            <!-- Testimonial Cards -->
+            <script>
+                const tests = [
+                    { name: "Rahul Verma", biz: "Verma Jewellers", loc: "Delhi", quote: "Hamari dukaan mein 40% zyada customers aane lage just 2 months mein. The WhatsApp bot is magic." },
+                    { name: "Priya Sharma", biz: "Glow & Grow Clinic", loc: "Mumbai", quote: "Pehle reception pe calls miss hoti thi. Ab AI sab handle karta hai. Appointments double ho gaye hain." },
+                    { name: "Amit Desai", biz: "Desai Motors", loc: "Ahmedabad", quote: "Lead cost halved. The AI follow-up system makes sure no prospect is ignored. Highly recommend Viraal." },
+                    { name: "Vikram Singh", biz: "Elite Fitness", loc: "Gurgaon", quote: "Membership renewals automated. New inquiries answered at 2 AM. Best investment for our gym." }
+                ];
+                tests.forEach(t => {
+                    document.write(`
+                        <div class="snap-start flex-shrink-0 w-80 md:w-96 bg-white border border-border rounded-2xl p-6 shadow-sm flex flex-col">
+                            <div class="aspect-video bg-gray-900 rounded-xl mb-6 relative overflow-hidden flex items-center justify-center group cursor-pointer">
+                                <div class="absolute inset-0 bg-cover bg-center opacity-50 grayscale group-hover:grayscale-0 transition-all duration-500" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiM2NDc0OEIiLz48L3N2Zz4=')"></div>
+                                <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white group-hover:bg-gold group-hover:text-charcoal transition-all relative z-10">
+                                    <iconify-icon icon="solar:play-bold" class="text-xl ml-1"></iconify-icon>
+                                </div>
+                            </div>
+                            <p class="font-sans font-medium text-charcoal italic mb-6 flex-grow">"${t.quote}"</p>
+                            <div class="flex items-center gap-3 mt-auto">
+                                <div class="w-10 h-10 rounded-full bg-gray-200 flex-shrink-0 flex items-center justify-center text-gray-500 font-bold font-heading">${t.name.charAt(0)}</div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-charcoal">${t.name}</h4>
+                                    <p class="text-xs text-slate">${t.biz} • ${t.loc}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `);
+                });
+            </script>
+            <div class="snap-start flex-shrink-0 w-4 md:w-8"></div>
+        </div>
+    </section>
+
+    <!-- 11. FAQ ACCORDION -->
+    <section class="py-20 bg-white border-t border-border">
+        <div class="max-w-3xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="font-heading font-bold text-3xl text-charcoal tracking-tight">Got Questions?</h2>
+                <p class="text-slate mt-2">Answers to common doubts.</p>
+            </div>
+
+            <div class="space-y-4" id="faq-container">
+                <!-- FAQs generated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 12. FINAL CTA -->
+    <section class="relative bg-gradient-to-r from-gold to-yellow-500 py-24 overflow-hidden">
+        <!-- Abstract shapes -->
+        <div
+            class="absolute top-0 right-0 w-[500px] h-[500px] bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3">
+        </div>
+        <div
+            class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-red-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3">
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
+            <h2 class="font-heading font-extrabold text-4xl md:text-5xl text-charcoal tracking-tight mb-6">Ready to
+                automate your business growth?</h2>
+            <p class="text-charcoal/80 font-medium text-lg md:text-xl mb-10 max-w-2xl mx-auto">Join 200+ Indian
+                businesses already using AI to get more customers, save time, and increase profits.</p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button
+                    class="w-full sm:w-auto bg-charcoal text-white font-bold uppercase text-sm px-8 min-h-[3.5rem] rounded-lg hover:bg-gray-800 active:scale-97 transition-all flex items-center justify-center gap-2 shadow-xl">
+                    <iconify-icon icon="solar:chat-round-line-linear" class="text-xl"></iconify-icon> Start on WhatsApp
+                </button>
+                <button
+                    class="w-full sm:w-auto bg-transparent border-2 border-charcoal text-charcoal font-bold uppercase text-sm px-8 min-h-[3.5rem] rounded-lg hover:bg-charcoal hover:text-white active:scale-97 transition-all flex items-center justify-center gap-2">
+                    <iconify-icon icon="solar:phone-calling-linear" class="text-xl"></iconify-icon> Get a Free AI Audit
+                </button>
+            </div>
+            <p class="mt-8 text-sm text-charcoal/70 font-semibold">Or call us directly: <a href="tel:+919876543210"
+                    class="underline hover:text-charcoal">++91-9876543210</a></p>
+        </div>
+    </section>
+
+    <!-- 13. FOOTER -->
+    <footer class="bg-[#020617] text-gray-400 py-16 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+            <div>
+                <span
+                    class="font-heading font-extrabold text-2xl text-white tracking-tighter uppercase mb-6 block">Viraal</span>
+                <p class="text-sm mb-6 leading-relaxed">India's leading AI automation agency dedicated to transforming
+                    Micro, Small &amp; Medium Enterprises into scalable digital powerhouses.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors"><iconify-icon
+                            icon="solar:hashtag-linear" class="text-xl"></iconify-icon></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors"><iconify-icon
+                            icon="solar:link-circle-linear" class="text-xl"></iconify-icon></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors"><iconify-icon
+                            icon="solar:videocamera-record-linear" class="text-xl"></iconify-icon></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors"><iconify-icon
+                            icon="solar:phone-calling-linear" class="text-xl"></iconify-icon></a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold mb-6 tracking-wide text-sm uppercase">Solutions</h4>
+                <ul class="space-y-3 text-sm">
+                    <li><a href="#" class="hover:text-gold transition-colors">Lead Gen Automation</a></li>
+                    <li><a href="#" class="hover:text-gold transition-colors">AI Chatbots</a></li>
+                    <li><a href="#" class="hover:text-gold transition-colors">Social Media Automation</a></li>
+                    <li><a href="#" class="hover:text-gold transition-colors">Sales Follow-ups</a></li>
+                    <li><a href="#" class="hover:text-gold transition-colors">AI Content &amp; Video</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold mb-6 tracking-wide text-sm uppercase">Industries</h4>
+                <ul class="space-y-3 text-sm">
+                    <li><a href="#" class="hover:text-gold transition-colors">Real Estate</a></li>
+                    <li><a href="#" class="hover:text-gold transition-colors">Jewellery Retail</a></li>
+                    <li><a href="#" class="hover:text-gold transition-colors">Hospitals &amp; Clinics</a></li>
+                    <li><a href="#" class="hover:text-gold transition-colors">Fitness Centers</a></li>
+                    <li><a href="#" class="hover:text-gold transition-colors">Education &amp; Coaching</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold mb-6 tracking-wide text-sm uppercase">Company</h4>
+                <ul class="space-y-3 text-sm">
+                    <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Case Studies</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div
+            class="max-w-7xl mx-auto px-4 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
+            <p>© 2024 Viraal AI Solutions. All rights reserved.</p>
+            <div class="flex gap-6">
+                <a href="#" class="hover:text-white">Privacy Policy</a>
+                <a href="#" class="hover:text-white">Terms of Service</a>
+                <a href="#" class="hover:text-white">Refund Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FLOATING WHATSAPP -->
+    <a href="#"
+        class="fixed bottom-0 left-0 w-full md:w-auto md:left-auto md:bottom-6 md:right-6 bg-[#25D366] text-white flex items-center justify-center gap-2 p-4 md:px-6 md:py-3 md:rounded-full z-50 hover:bg-[#1ebd5a] hover:scale-105 transition-all shadow-[0_0_20px_rgba(37,211,102,0.5)] font-bold text-sm group">
+        <iconify-icon icon="solar:phone-calling-linear"
+            class="text-2xl group-hover:scale-110 transition-transform"></iconify-icon>
+        <span class="md:block">Chat Now</span>
+    </a>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu Toggle
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            // Populate Builder Checkboxes
+            const builderServices = [
+                { id: 'b1', name: 'Lead Generation System', price: 7999 },
+                { id: 'b2', name: 'WhatsApp & Web AI Chatbot', price: 6999 },
+                { id: 'b3', name: 'Social Media Autopilot', price: 6499 },
+                { id: 'b4', name: 'Automated Follow-ups', price: 7999 },
+                { id: 'b5', name: 'AI Content Engine', price: 4999 }
+            ];
+
+            const listContainer = document.getElementById('checkbox-list');
+            builderServices.forEach(s => {
+                listContainer.innerHTML += `
+                    <label class="flex items-center justify-between p-3 border border-border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors custom-checkbox group">
+                        <div class="flex items-center gap-3">
+                            <input type="checkbox" class="builder-cb" value="${s.price}">
+                            <span class="text-sm font-medium text-charcoal group-hover:text-gold transition-colors">${s.name}</span>
+                        </div>
+                        <span class="text-xs font-bold text-slate">₹${s.price.toLocaleString('en-IN')}</span>
+                    </label>
+                `;
+            });
+
+            // Builder Logic
+            const checkboxes = document.querySelectorAll('.builder-cb');
+            const totalEl = document.getElementById('builder-total');
+            const recEl = document.getElementById('bundle-recommendation');
+            const saveEl = document.getElementById('save-amount');
+
+            const calculateTotal = () => {
+                let total = 0;
+                checkboxes.forEach(cb => {
+                    if (cb.checked) total += parseInt(cb.value);
+                });
+
+                totalEl.innerText = `₹${total.toLocaleString('en-IN')}`;
+
+                if (total > 14999) {
+                    recEl.classList.remove('hidden');
+                    saveEl.innerText = (total - 14999).toLocaleString('en-IN');
+                } else {
+                    recEl.classList.add('hidden');
+                }
+            };
+
+            checkboxes.forEach(cb => cb.addEventListener('change', calculateTotal));
+
+            // ROI Calculator Logic
+            const slider = document.getElementById('rev-slider');
+            const revVal = document.getElementById('rev-val');
+            const leadsEl = document.getElementById('calc-leads');
+            const recRevEl = document.getElementById('calc-rev');
+            const hoursEl = document.getElementById('calc-hours');
+
+            const updateROI = () => {
+                const val = parseInt(slider.value);
+                revVal.innerText = `₹${val} Lakh${val > 1 ? 's' : ''}`;
+
+                // Mock formulas
+                const leadsLost = Math.floor(val * 4.5);
+                const recovery = (val * 0.15).toFixed(1);
+                const hours = Math.floor(20 + (val * 1.5));
+
+                leadsEl.innerText = `${leadsLost}/mo`;
+                recRevEl.innerText = `₹${recovery}L/mo`;
+                hoursEl.innerText = `${hours} hrs`;
+            };
+
+            slider.addEventListener('input', updateROI);
+            document.querySelectorAll('input[name="bottleneck"]').forEach(r => r.addEventListener('change', updateROI));
+            document.querySelector('select').addEventListener('change', updateROI);
+            updateROI(); // init
+
+            // FAQs
+            const faqs = [
+                { q: "Kya yeh mere jaisi chhoti dukaan ke liye kaam karega?", a: "Absolutely! Our solutions are specifically designed for MSMEs. Whether you have 1 employee or 50, our AI scales to your needs seamlessly." },
+                { q: "Pehle ek agency se kaam karaya tha, kuch nahi hua", a: "We hear this often. Unlike traditional agencies that rely on manual work, our AI systems guarantee consistency and trackable ROI every single day." },
+                { q: "Kitna kharcha aayega total?", a: "Our packages start at just ₹4,999/month. No hidden fees. You can use the calculator above to build a package that fits your exact budget." },
+                { q: "Kya mujhe kuch sikhna padega?", a: "Not at all. We handle the technical setup entirely. You just need to know how to open WhatsApp or your email to receive the leads." }
+            ];
+
+            const faqContainer = document.getElementById('faq-container');
+            faqs.forEach((faq, i) => {
+                faqContainer.innerHTML += `
+                    <div class="border border-border rounded-xl bg-gray-50 faq-item overflow-hidden">
+                        <button class="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none" onclick="toggleFaq(this)">
+                            <span class="font-bold text-sm text-charcoal">${faq.q}</span>
+                            <iconify-icon icon="solar:alt-arrow-down-linear" class="text-gold text-xl faq-icon"></iconify-icon>
+                        </button>
+                        <div class="faq-content bg-white border-t border-border">
+                            <div class="px-6 py-4 text-sm text-slate">
+                                ${faq.a}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Counters Animation via Intersection Observer
+            const counters = document.querySelectorAll('.counter');
+            const speed = 200;
+
+            const animateCounters = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = +counter.getAttribute('data-target');
+
+                        const updateCount = () => {
+                            const count = +counter.innerText;
+                            const inc = target / speed;
+                            if (count < target) {
+                                counter.innerText = Math.ceil(count + inc);
+                                setTimeout(updateCount, 10);
+                            } else {
+                                counter.innerText = target.toLocaleString('en-IN');
+                            }
+                        };
+                        updateCount();
+                        observer.unobserve(counter);
+                    }
+                });
+            };
+
+            const observer = new IntersectionObserver(animateCounters, { threshold: 0.5 });
+            counters.forEach(c => observer.observe(c));
+        });
+
+        // Global FAQ toggle function
+        function toggleFaq(btn) {
+            const item = btn.parentElement;
+            const content = btn.nextElementSibling;
+            const allItems = document.querySelectorAll('.faq-item');
+
+            // Close others (optional accordion behavior)
+            allItems.forEach(i => {
+                if (i !== item) {
+                    i.classList.remove('active');
+                    i.querySelector('.faq-content').classList.remove('open');
+                }
+            });
+
+            item.classList.toggle('active');
+            content.classList.toggle('open');
+        }
+    </script>
+
+</body>
+
+</html>
