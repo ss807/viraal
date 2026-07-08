@@ -11,7 +11,7 @@ export function TopAppBar() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex-shrink-0 flex items-center cursor-pointer">
-              <span className="font-heading font-extrabold text-2xl text-transparent bg-clip-text bg-gradient-to-r from-navy to-gold tracking-tighter uppercase">
+              <span className="font-heading font-extrabold text-2xl text-navy tracking-tighter uppercase">
                 Viraal
               </span>
             </div>

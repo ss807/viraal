@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import HeroSection from "@/components/home/HeroSection";
+import PackageBuilderAndRoi from "@/components/home/PackageBuilderAndRoi";
 
 declare global {
   namespace JSX {
@@ -32,13 +34,6 @@ const faqsData = [
   { q: "Kya mujhe kuch sikhna padega?", a: "Not at all. We handle the technical setup entirely. You just need to know how to open WhatsApp or your email to receive the leads." }
 ];
 
-const builderServicesList = [
-  { id: 'b1', name: 'Lead Generation System', price: 7999 },
-  { id: 'b2', name: 'WhatsApp & Web AI Chatbot', price: 6999 },
-  { id: 'b3', name: 'Social Media Autopilot', price: 6499 },
-  { id: 'b4', name: 'Automated Follow-ups', price: 7999 },
-  { id: 'b5', name: 'AI Content Engine', price: 4999 }
-];
 
 const industries = [
   { n: "Jewellery", i: "solar:crown-linear" },
@@ -61,68 +56,11 @@ const testimonials = [
 
 export default function HomePage() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
-  const [selectedBuilder, setSelectedBuilder] = useState<Set<string>>(new Set());
-  const [revenueSlider, setRevenueSlider] = useState(10);
-
-  const toggleBuilderItem = (id: string) => {
-    const newSet = new Set(selectedBuilder);
-    if (newSet.has(id)) newSet.delete(id);
-    else newSet.add(id);
-    setSelectedBuilder(newSet);
-  };
-
-  const builderTotal = builderServicesList
-    .filter(s => selectedBuilder.has(s.id))
-    .reduce((sum, s) => sum + s.price, 0);
-
-  const leadsLost = Math.floor(revenueSlider * 4.5);
-  const recovery = (revenueSlider * 0.15).toFixed(1);
-  const hours = Math.floor(20 + (revenueSlider * 1.5));
 
   return (
     <>
-      {/* 3. HERO SECTION (From home.html EXACTLY) */}
-      <header className="relative min-h-[90vh] flex flex-col justify-center items-center text-center overflow-hidden hero-bg animate-wave py-20 px-4">
-        {/* Decorative particles */}
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9InJnYmEoMTUsMjMsNDIsMC4wNSkiLz48L3N2Zz4=')] opacity-50"></div>
-
-        <div className="relative z-10 max-w-4xl mx-auto space-y-6 md:space-y-8">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-navy text-xs font-semibold uppercase tracking-wider mb-2 shadow-sm">
-            <span className="w-2 h-2 rounded-full bg-success animate-pulse"></span> For Indian MSMEs
-          </div>
-
-          <h1 className="font-heading font-extrabold text-5xl md:text-6xl lg:text-7xl text-charcoal tracking-tight leading-tight">
-            AI-Powered Growth. <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-navy to-gold">Real Results.</span>
-          </h1>
-
-          <p className="font-sans font-medium text-lg md:text-xl text-slate max-w-2xl mx-auto leading-relaxed">
-            Complete AI Automation Solutions tailored for small and medium businesses. Starting at just <span className="text-navy font-bold">₹4,999/month</span>.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            <a href="#builder" className="w-full sm:w-auto flex items-center justify-center gap-2 bg-gold text-charcoal font-bold uppercase text-sm px-8 min-h-[3rem] rounded-lg hover:brightness-110 active:scale-97 transition-all shadow-[0_0_20px_rgba(245,158,11,0.3)]">
-              Build Your AI Package <iconify-icon icon="solar:arrow-right-linear" class="text-lg"></iconify-icon>
-            </a>
-            <a href="#" className="w-full sm:w-auto flex items-center justify-center gap-2 bg-white text-charcoal border border-border font-bold uppercase text-sm px-8 min-h-[3rem] rounded-lg hover:border-navy hover:text-navy active:scale-97 transition-all shadow-sm">
-              <iconify-icon icon="solar:chat-round-dots-linear" class="text-lg"></iconify-icon> Chat with our AI Now
-            </a>
-          </div>
-        </div>
-
-        {/* Video Placeholder */}
-        <div className="relative z-10 w-full max-w-4xl mx-auto mt-16 px-4">
-          <div className="aspect-video w-full rounded-2xl border border-white/50 bg-white/60 backdrop-blur-xl flex flex-col items-center justify-center shadow-[0_20px_50px_rgba(15,23,42,0.1)] relative overflow-hidden group cursor-pointer transition-transform hover:-translate-y-2">
-            <div className="absolute inset-0 bg-gradient-to-t from-gray-100 to-transparent opacity-60"></div>
-            <div className="w-16 h-16 rounded-full bg-gold text-charcoal flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-[0_0_30px_rgba(245,158,11,0.4)] relative z-10">
-              <iconify-icon icon="solar:play-bold" class="text-2xl ml-1"></iconify-icon>
-            </div>
-            <span className="text-charcoal font-heading font-extrabold tracking-tight relative z-10 text-lg md:text-xl">
-              90-Second AI Video Sales Letter
-            </span>
-            <span className="text-slate font-medium text-sm mt-2 relative z-10">See how we transform businesses like yours</span>
-          </div>
-        </div>
-      </header>
+      {/* 3. HERO SECTION (Matching hero.png reference exactly) */}
+      <HeroSection />
 
       {/* 4. TRUST BAR */}
       <section className="bg-white border-b border-border py-6 overflow-hidden flex flex-col items-center justify-center" id="trust">
@@ -332,137 +270,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 7. INTERACTIVE PACKAGE BUILDER & ROI CALCULATOR */}
-      <section id="pricing" className="py-20 px-4 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-
-          {/* Builder */}
-          <div className="bg-white border border-border rounded-2xl p-6 md:p-8 shadow-sm flex flex-col h-full" id="builder">
-            <h2 className="font-heading font-bold text-2xl tracking-tight mb-6 flex items-center gap-2">
-              <iconify-icon icon="solar:box-linear" class="text-gold text-3xl"></iconify-icon> Build Your AI Package
-            </h2>
-
-            <div className="space-y-4 flex-grow">
-              {builderServicesList.map(s => (
-                <label key={s.id} className="flex items-center justify-between p-3 border border-border rounded-lg cursor-pointer hover:bg-gray-50 transition-colors custom-checkbox group">
-                  <div className="flex items-center gap-3">
-                    <input 
-                      type="checkbox" 
-                      value={s.price}
-                      checked={selectedBuilder.has(s.id)}
-                      onChange={() => toggleBuilderItem(s.id)}
-                    />
-                    <span className="text-sm font-medium text-charcoal group-hover:text-gold transition-colors">{s.name}</span>
-                  </div>
-                  <span className="text-xs font-bold text-slate">₹{s.price.toLocaleString('en-IN')}</span>
-                </label>
-              ))}
-            </div>
-
-            <div className="mt-8 pt-6 border-t border-border">
-              <div className="flex justify-between items-end mb-4">
-                <span className="text-slate font-medium">Estimated Monthly Investment</span>
-                <div className="text-right">
-                  <span className="text-xs text-gray-400 block mb-1 uppercase tracking-wider font-bold">Total</span>
-                  <span className="font-numbers font-bold text-3xl text-charcoal">₹{builderTotal.toLocaleString('en-IN')}</span><span className="text-slate">/mo</span>
-                </div>
-              </div>
-
-              {builderTotal > 14999 && (
-                <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6 transition-all">
-                  <div className="flex gap-3">
-                    <iconify-icon icon="solar:lightbulb-bolt-linear" class="text-blue-600 text-2xl shrink-0"></iconify-icon>
-                    <div>
-                      <h4 className="font-bold text-blue-900 text-sm">💡 RECOMMENDED: Starter AI Pack</h4>
-                      <p className="text-xs text-blue-800 mt-1">Get top 3 services for just <span className="font-bold">₹14,999/mo</span>. <span className="text-success font-bold">Save ₹{(builderTotal - 14999).toLocaleString('en-IN')}!</span></p>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              <button className="w-full bg-gold text-charcoal font-bold uppercase text-sm min-h-[3rem] rounded-lg hover:brightness-110 active:scale-97 transition-all flex items-center justify-center gap-2">
-                Send This Proposal to My WhatsApp <iconify-icon icon="solar:plain-2-linear" class="text-lg"></iconify-icon>
-              </button>
-            </div>
-          </div>
-
-          {/* ROI Calculator */}
-          <div className="bg-charcoal text-white rounded-2xl p-6 md:p-8 shadow-lg relative overflow-hidden flex flex-col h-full">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-gold/10 rounded-full blur-3xl -z-10 translate-x-1/2 -translate-y-1/2"></div>
-            <h2 className="font-heading font-bold text-2xl tracking-tight mb-2">ROI Calculator</h2>
-            <p className="text-gray-400 text-sm mb-8">See how much revenue you're leaving on the table.</p>
-
-            <div className="space-y-6 flex-grow">
-              <div>
-                <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-2">Industry</label>
-                <select className="w-full bg-gray-800 border border-gray-700 rounded-lg p-3 text-white focus:border-gold outline-none text-sm appearance-none cursor-pointer">
-                  <option>Retail & E-commerce</option>
-                  <option>Real Estate</option>
-                  <option>Healthcare & Clinics</option>
-                  <option>Education & Coaching</option>
-                  <option>Professional Services</option>
-                </select>
-              </div>
-
-              <div>
-                <div className="flex justify-between items-end mb-2">
-                  <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider">Monthly Revenue</label>
-                  <span className="font-numbers font-bold text-gold">₹{revenueSlider} Lakh{revenueSlider > 1 ? 's' : ''}</span>
-                </div>
-                <input 
-                  type="range" 
-                  min="1" max="50" step="1" 
-                  value={revenueSlider}
-                  onChange={(e) => setRevenueSlider(parseInt(e.target.value))}
-                />
-                <div className="flex justify-between text-2xs text-gray-500 mt-1 font-numbers">
-                  <span>₹1L</span>
-                  <span>₹50L+</span>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-3">Biggest Bottleneck</label>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <label className="custom-radio flex items-center gap-3 bg-gray-800 p-3 rounded-lg border border-gray-700 hover:border-gray-500 transition-colors">
-                    <input type="radio" name="bottleneck" defaultChecked />
-                    <span className="text-sm font-medium">Not enough leads</span>
-                  </label>
-                  <label className="custom-radio flex items-center gap-3 bg-gray-800 p-3 rounded-lg border border-gray-700 hover:border-gray-500 transition-colors">
-                    <input type="radio" name="bottleneck" />
-                    <span className="text-sm font-medium">Leads get lost</span>
-                  </label>
-                  <label className="custom-radio flex items-center gap-3 bg-gray-800 p-3 rounded-lg border border-gray-700 hover:border-gray-500 transition-colors">
-                    <input type="radio" name="bottleneck" />
-                    <span className="text-sm font-medium">Manual work</span>
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-8 bg-gray-900 rounded-xl p-4 border border-gray-700 flex flex-col sm:flex-row justify-around gap-4 text-center">
-              <div>
-                <span className="block text-2xs text-gray-400 uppercase tracking-wider mb-1">Estimated Leads Lost</span>
-                <span className="font-numbers font-bold text-xl text-red-400">{leadsLost}/mo</span>
-              </div>
-              <div className="hidden sm:block w-px bg-gray-700"></div>
-              <div>
-                <span className="block text-2xs text-gray-400 uppercase tracking-wider mb-1">Potential Recovery</span>
-                <span className="font-numbers font-bold text-xl text-success">₹{recovery}L/mo</span>
-              </div>
-              <div className="hidden sm:block w-px bg-gray-700"></div>
-              <div>
-                <span className="block text-2xs text-gray-400 uppercase tracking-wider mb-1">Hours Saved</span>
-                <span className="font-numbers font-bold text-xl text-blue-400">{hours} hrs</span>
-              </div>
-            </div>
-
-            <button className="w-full bg-white text-charcoal font-bold uppercase text-sm min-h-[3rem] rounded-lg hover:bg-gray-100 active:scale-97 transition-all mt-6">
-              Get Free Custom Growth Plan
-            </button>
-          </div>
-        </div>
-      </section>
+      {/* 7. INTERACTIVE PACKAGE BUILDER & ROI CALCULATOR (Matching Screenshot 2026-07-08 230736.png exactly) */}
+      <PackageBuilderAndRoi />
 
       {/* 8. INDUSTRY CAROUSEL */}
       <section id="industries" className="py-10 bg-white border-y border-border overflow-hidden">
